@@ -27,27 +27,28 @@ from models.board import Board
 
 
 
-def show_board(boardClass: Board):
+def get_board_str(boardClass: Board):
     board, captured = boardClass.getStatus()
     c_char = ["E", "G", "C", "e", "g", "c"]
     b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "l"]
-    print("[", end="")
+    str = ""
 
     # 相手持ち駒
+    str += "["
     for i in range(3):
-        print(f"{c_char[i+3]*captured[i+3]}", end="")
-    print("]")
+        str += f"{c_char[i+3]*captured[i+3]}"
+    str += "]\n"
     
     # 盤面
     for i in range(4):
-        print("-------")
-        print(
-            f"|{b_char[board[i*3]]}|{b_char[board[i*3+1]]}|{b_char[board[i*3+2]]}|")
-    print("-------")
+        str += "-------\n"
+        str += f"|{b_char[board[i*3]]}|{b_char[board[i*3+1]]}|{b_char[board[i*3+2]]}|\n"
+    str += "-------\n"
 
     # 自分持ち駒
-    print("[", end="")
+    str += "["
     for i in range(3):
-        print(f"{c_char[i]*captured[i]}", end="")
-    print("]")
-    print()
+        str += f"{c_char[i]*captured[i]}"
+    str += "]\n\n"
+
+    return str

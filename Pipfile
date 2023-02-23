@@ -6,10 +6,12 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.11"
 python_full_version = "3.11.2"
 
 [scripts]
-test = "python test.py"
+test = "python -m pytest ../tests"
+run-test = "zsh -c 'cd src && pipenv run test'"
