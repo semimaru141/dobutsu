@@ -1,3 +1,4 @@
+from models.board import Board
 """
 マスの情報
 0 空白
@@ -25,32 +26,28 @@
 """
 
 
-def show_board(board, captured):
+
+def show_board(boardClass: Board):
+    board, captured = boardClass.getStatus()
     c_char = ["E", "G", "C", "e", "g", "c"]
     b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "l"]
     print("[", end="")
+
+    # 相手持ち駒
     for i in range(3):
         print(f"{c_char[i+3]*captured[i+3]}", end="")
     print("]")
+    
+    # 盤面
     for i in range(4):
         print("-------")
         print(
             f"|{b_char[board[i*3]]}|{b_char[board[i*3+1]]}|{b_char[board[i*3+2]]}|")
     print("-------")
+
+    # 自分持ち駒
     print("[", end="")
     for i in range(3):
         print(f"{c_char[i]*captured[i]}", end="")
     print("]")
     print()
-
-
-if __name__ == "__main__":
-    # 初期状態
-    board = [8, 6, 7, 0, 9, 0, 0, 4, 0, 2, 1, 3]
-    captured = [0, 0, 0, 0, 0, 0]
-    show_board(board, captured)
-
-    # 手番が進んだ状態
-    board = [0, 5, 6, 0, 0, 0, 2, 0, 0, 0, 1, 0]
-    captured = [0, 1, 1, 1, 1, 0]
-    show_board(board, captured)
