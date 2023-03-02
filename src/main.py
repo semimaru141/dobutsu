@@ -1,4 +1,4 @@
-from utils.show_board import get_board_str
+from utils.get_board_str import get_board_str
 from models.board import Board
 
 if __name__ == "__main__":
