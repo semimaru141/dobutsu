@@ -20,7 +20,7 @@ def get_next_boards(state: State):
             newState = state.copy()
             board, captured = newState.getState()
             dstPiece = board.getPiece(place + move)
-            if dstPiece > 0 & dstPiece < 6:
+            if dstPiece > 0 and dstPiece < 6:
                 # 自分の駒がある場合は移動できない
                 continue
             elif dstPiece > 5:
@@ -41,7 +41,7 @@ def get_move(piece: int, place: int):
             return [-3]
         else: return []
     elif piece == MY_ELE_NUM:
-        if place == 4 | place == 7:
+        if place == 4 or place == 7:
             return [-4, -2, 2, 4]
         elif place == 0:
             return [4]
@@ -49,9 +49,9 @@ def get_move(piece: int, place: int):
             return [2, 4]
         elif place == 2:
             return [2]
-        elif place == 3 | place == 6:
+        elif place == 3 or place == 6:
             return [-2, 4]
-        elif place == 5 | place == 8:
+        elif place == 5 or place == 8:
             return [-4, 2]
         elif place == 9:
             return [-2]
@@ -60,7 +60,7 @@ def get_move(piece: int, place: int):
         elif place == 11:
             return [-4]
     elif piece == MY_ZIR_NUM:
-        if place == 4 | place == 7:
+        if place == 4 or place == 7:
             return [-3, -1, 1, 3]
         elif place == 0:
             return [1, 3]
@@ -68,9 +68,9 @@ def get_move(piece: int, place: int):
             return [-1, 1, 3]
         elif place == 2:
             return [-1, 3]
-        elif place == 3 | place == 6:
+        elif place == 3 or place == 6:
             return [-3, 1, 3]
-        elif place == 5 | place == 8:
+        elif place == 5 or place == 8:
             return [-3, -1, 3]
         elif place == 9:
             return [-3, 1]
@@ -79,7 +79,7 @@ def get_move(piece: int, place: int):
         elif place == 11:
             return [-3, -1]
     elif piece == MY_LION_NUM:
-        if place == 4 | place == 7:
+        if place == 4 or place == 7:
             return [-4, -3, -2, -1, 1, 2, 3, 4]
         elif place == 0:
             return [1, 3, 4]
@@ -87,9 +87,9 @@ def get_move(piece: int, place: int):
             return [-1, 1, 2, 3, 4]
         elif place == 2:
             return [-1, 2, 3]
-        elif place == 3 | place == 6:
+        elif place == 3 or place == 6:
             return [-3, -2, 1, 3, 4]
-        elif place == 5 | place == 8:
+        elif place == 5 or place == 8:
             return [-4, -3, -1, 2, 3]
         elif place == 9:
             return [-3, -2, 1]
@@ -97,3 +97,4 @@ def get_move(piece: int, place: int):
             return [-4, -3, -2, -1, 1]
         elif place == 11:
             return [-4, -3, -1]
+    else: return []
