@@ -1,5 +1,4 @@
-from models.board import Board
-from utils.get_board_str import get_board_str
+from models.board import State
 
 start_board = '''[]
 -------
@@ -33,12 +32,12 @@ class TestGetBoardStr:
     def test_initial_board(self):
         board = [8, 6, 7, 0, 9, 0, 0, 4, 0, 2, 1, 3]
         captured = [0, 0, 0, 0, 0, 0]
-        boardClass = Board(board, captured)
-        assert get_board_str(boardClass) == start_board
+        state = State.create(board, captured)
+        assert state.getStr() == start_board
 
     # 手番が進んだ状態
     def test_in_progress_board(self):
         board = [0, 5, 6, 0, 0, 0, 2, 0, 0, 0, 1, 0]
         captured = [0, 1, 1, 1, 1, 0]
-        boardClass = Board(board, captured)
-        assert get_board_str(boardClass) == in_progress_board
+        state = State.create(board, captured)
+        assert state.getStr() == in_progress_board
