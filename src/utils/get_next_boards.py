@@ -1,12 +1,5 @@
 from models.board import State
-
-RANGE_OF_BOARD = 12
-
-EMPTY = 0
-MY_LION_NUM = 1
-MY_ELE_NUM = 2
-MY_ZIR_NUM = 3
-MY_CHICK_NUM = 4
+from consts.const import *
 
 def get_next_boards(state: State):
     res = []
