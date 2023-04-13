@@ -21,7 +21,7 @@ def get_next_boards(state: State):
             
             board.setPiece(place, EMPTY)
             # 成りのアルゴリズム
-            if (piece == MY_CHICK_NUM and place in [0, 1, 2]):
+            if (piece == MY_CHICK_NUM and place + move in [0, 1, 2]):
                 board.setPiece(place + move, MY_HEN_NUM)
             else:
                 board.setPiece(place + move, piece)
