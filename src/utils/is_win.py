@@ -15,5 +15,75 @@ def is_win(state: State) -> bool:
         if board.getPiece(i) == OP_LION_NUM:
             opLionPlace = i
             break
+    get_catchable_place(opLionPlace)
     
     return False
+
+def get_catchable_place(opLionPalce):
+    if opLionPalce == 7 or opLionPalce == 4:
+        return [[], [], []]
+
+# 移動先を取得する
+def get_move(piece: int, place: int):
+    if piece == MY_CHICK_NUM:
+        if place > 2:
+            return [-3]
+        else: return []
+    elif piece == MY_ELE_NUM:
+        if place == 4 or place == 7:
+            return [-4, -2, 2, 4]
+        elif place == 0:
+            return [4]
+        elif place == 1:
+            return [2, 4]
+        elif place == 2:
+            return [2]
+        elif place == 3 or place == 6:
+            return [-2, 4]
+        elif place == 5 or place == 8:
+            return [-4, 2]
+        elif place == 9:
+            return [-2]
+        elif place == 10:
+            return [-4, -2]
+        elif place == 11:
+            return [-4]
+    elif piece == MY_ZIR_NUM:
+        if place == 4 or place == 7:
+            return [-3, -1, 1, 3]
+        elif place == 0:
+            return [1, 3]
+        elif place == 1:
+            return [-1, 1, 3]
+        elif place == 2:
+            return [-1, 3]
+        elif place == 3 or place == 6:
+            return [-3, 1, 3]
+        elif place == 5 or place == 8:
+            return [-3, -1, 3]
+        elif place == 9:
+            return [-3, 1]
+        elif place == 10:
+            return [-3, -1, 1]
+        elif place == 11:
+            return [-3, -1]
+    elif piece == MY_LION_NUM:
+        if place == 4 or place == 7:
+            return [-4, -3, -2, -1, 1, 2, 3, 4]
+        elif place == 0:
+            return [1, 3, 4]
+        elif place == 1:
+            return [-1, 1, 2, 3, 4]
+        elif place == 2:
+            return [-1, 2, 3]
+        elif place == 3 or place == 6:
+            return [-3, -2, 1, 3, 4]
+        elif place == 5 or place == 8:
+            return [-4, -3, -1, 2, 3]
+        elif place == 9:
+            return [-3, -2, 1]
+        elif place == 10:
+            return [-4, -3, -2, -1, 1]
+        elif place == 11:
+            return [-4, -3, -1]
+    else: return []
