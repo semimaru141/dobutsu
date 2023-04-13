@@ -1,7 +1,8 @@
-import numpy as np
+from typing import Generator
+from consts.const import *
 
 c_char = ["E", "G", "C", "e", "g", "c"]
-b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "l"]
+b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "h"]
 
 Piece = int
 Place = int
@@ -74,6 +75,9 @@ class Board:
     def getStr(self, place: Place) -> str:
         return b_char[self._board[place]]
     
+    def getEmptyPlaces(self) -> list[Place]:
+        return [place for place in range(RANGE_OF_BOARD) if self._board[place] == EMPTY]
+    
 class Captured:
     def __init__(self, captured: list[int]):
         self._captured = captured
@@ -82,8 +86,14 @@ class Captured:
         return Captured(self._captured.copy())
     
     def takePiece(self, piece: Piece):
+        if(piece == OP_LION_NUM): return
         index = parsePiece(piece)
         self._captured[index] += 1
+    
+    def usePiece(self, piece: Piece):
+        index = parsePiece(piece)
+        self._captured[index] -= 1
+        print (self._captured)
 
     def getMyStr(self) -> str:
         ret = ''
@@ -96,20 +106,32 @@ class Captured:
         for i in range(3):
             ret += c_char[i+3]*self._captured[i+3]
         return ret
+    
+    def getMyPieces(self) -> list[Piece]:
+        return [getPieceNum(capturedIndex) for capturedIndex in range(3) if self._captured[capturedIndex] != 0]
 
-
-
-# 駒を与えると、相手の駒のインデックスを返す
+# 駒を与えると、自分の駒のインデックスを返す
+# 駒取得時・駒使用時の双方から使用される
 pieceToCapIndexDic = {
-    2: 3,
-    3: 4,
-    4: 5,
-    5: 5,
-    7: 0,
-    8: 1,
-    9: 2,
-    10: 2
+    MY_ELE_NUM: MY_ELE_INDEX,
+    MY_GIR_NUM: MY_GIR_INDEX,
+    MY_CHICK_NUM: MY_CHICK_INDEX,
+    MY_HEN_NUM: MY_CHICK_INDEX,
+    OP_ELE_NUM: MY_ELE_INDEX,
+    OP_GIR_NUM: MY_GIR_INDEX,
+    OP_CHICK_NUM: MY_CHICK_INDEX,
+    OP_HEN_NUM: MY_CHICK_INDEX
 }
 
 def parsePiece(piece: Piece) -> CapturedIndex:
     return pieceToCapIndexDic[piece]
+
+# 持ち駒のインデックスから打った後のPieceを返す
+capIndexToPieceDic = {
+    MY_ELE_INDEX: MY_ELE_NUM,
+    MY_GIR_INDEX: MY_GIR_NUM,
+    MY_CHICK_INDEX: MY_CHICK_NUM
+}
+
+def getPieceNum(index: CapturedIndex) -> Piece:
+    return capIndexToPieceDic[index]
