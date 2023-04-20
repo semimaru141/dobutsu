@@ -5,7 +5,7 @@ def is_win(state: State) -> bool:
     # 自分のLが最終段に存在する または 相手に王手がかかっている場合に勝利となる
     # 自分のLが最終段に存在する(厳密な条件ではないものの、今回はこちらを条件とした)
     board = state.getBoard()
-    for i in range(2):
+    for i in range(3):
         if board.getPiece(i) == MY_LION_NUM:
             return True
     

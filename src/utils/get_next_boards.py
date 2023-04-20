@@ -1,7 +1,7 @@
 from models.board import State
 from consts.const import *
 
-def get_next_boards(state: State):
+def get_next_boards(state: State) -> list[State]:
     res = []
     # 各場所ごとにピースを計算し、各自の動ける箇所から次の盤面を作り出す
     for place in range(RANGE_OF_BOARD):
