@@ -1,3 +1,5 @@
+from enum import Enum
+
 # board
 RANGE_OF_BOARD = 12
 
@@ -24,3 +26,7 @@ MY_CHICK_INDEX = 2
 OP_ELE_INDEX = 3
 OP_GIR_INDEX = 4
 OP_CHICK_INDEX = 5
+
+class Finish(Enum):
+    WIN = 1
+    LOSE = 2

@@ -1,4 +1,3 @@
-from typing import Generator
 from consts.const import *
 
 c_char = ["E", "G", "C", "e", "g", "c"]
