@@ -4,6 +4,7 @@ from models.evaluator import Evaluator
 from applications.test import History, Step, pick_state_randomly
 from consts.model import Finish, Score
 from consts.application import Winner
+from models.file_handler import FileHandler
 from utils.check_winner import check_winner
 
 TRIAL = 1
@@ -13,6 +14,8 @@ def learn():
     evaluator = Evaluator.create_zeros()
     for _ in range(TRIAL):
         run(evaluator, State.create_initial(), 0)
+    
+    FileHandler(evaluator).save_model('model')
     
 
 def run(evaluator: Evaluator, state: State, step: Step) -> Score:
@@ -30,7 +33,7 @@ def run(evaluator: Evaluator, state: State, step: Step) -> Score:
     # 再帰
     next_states = state.get_next_boards()
     next_state = pick_state_randomly(next_states)
-    score = run(next_state.turn(), step + 1)
+    score = run(evaluator, next_state.turn(), step + 1)
 
     # フィードバック
     evaluator.learn(state, score)

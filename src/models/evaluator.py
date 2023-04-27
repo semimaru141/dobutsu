@@ -4,7 +4,7 @@ from consts.model import *
 
 class Evaluator:
     def __init__(self) -> None:
-        self._model = np.zeros(tuple(11 for _ in range(12)))
+        self._model = np.zeros(tuple(11 for _ in range(12)), dtype=np.float32)
 
     @staticmethod
     def create_zeros() -> 'Evaluator':
@@ -32,5 +32,5 @@ class Evaluator:
         return target
     
     @property
-    def model(self) -> np.NDArray[np.float64]:
+    def model(self) -> np.ndarray[np.float64]:
         return self._model
