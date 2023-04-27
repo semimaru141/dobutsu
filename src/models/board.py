@@ -1,4 +1,4 @@
-from consts.const import *
+from consts.model import *
 
 c_char = ["E", "G", "C", "e", "g", "c"]
 b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "h"]

@@ -28,11 +28,6 @@ OP_GIR_INDEX = 4
 OP_CHICK_INDEX = 5
 
 class Finish(Enum):
+    NOT = 0
     WIN = 1
     LOSE = 2
-
-class Winner(Enum):
-    ME = 1
-    OP = -1
-    # draw
-    NO = 0

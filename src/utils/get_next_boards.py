@@ -1,5 +1,5 @@
 from models.board import State
-from consts.const import *
+from consts.model import *
 
 def get_next_boards(state: State) -> list[State]:
     res = []
