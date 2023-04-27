@@ -1,9 +1,19 @@
 # どうぶつ将棋の棋譜コードサンプル
 
-## 環境情報
-### 環境構築
+## 環境構築方法
+### pipenv install
+```
+pip install pipenv
+```
+### package install
 ```
 pipenv install --dev
+```
+
+## 環境情報
+### 仮想環境に入る方法
+```
+pipenv shell
 ```
 
 ### テスト実行方法

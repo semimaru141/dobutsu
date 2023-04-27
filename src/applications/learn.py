@@ -2,28 +2,36 @@ from typing import Tuple
 from models.state import State
 from models.evaluator import Evaluator
 from applications.test import History, Step, pick_state_randomly
-from consts.model import Finish
+from consts.model import Finish, Score
 from consts.application import Winner
 from utils.check_winner import check_winner
 
-def learn():
-    # 初期状態
-    state = State.create_initial()
-    evaluator = Evaluator.create_rand()
+TRIAL = 1
+LIMIT = 100
 
-def run(state: State, step: Step, history: History) -> Tuple[Winner, Step, History]:
-    # historyに追加
-    if step % 2 == 0: history.append(state)
-    else: history.append(state.turn())
+def learn():
+    evaluator = Evaluator.create_zeros()
+    for _ in range(TRIAL):
+        run(evaluator, State.create_initial(), 0)
+    
+
+def run(evaluator: Evaluator, state: State, step: Step) -> Score:
 
     # ループからの離脱
-    if step > 100: return Winner.NO, step, history
+    if step > LIMIT: return Winner.NO, step
 
     # 終了判定
     finish = state.get_finish()
-    if finish != Finish.NOT: return check_winner(finish, step), step, history
-        
+    if finish != Finish.NOT: 
+        winner = check_winner(finish, step)
+        if winner == Winner.ME: return 1
+        else: return -1
+
     # 再帰
     next_states = state.get_next_boards()
     next_state = pick_state_randomly(next_states)
-    return run(next_state.turn(), step + 1, history)
+    score = run(next_state.turn(), step + 1)
+
+    # フィードバック
+    evaluator.learn(state, score)
+    return score * -0.9

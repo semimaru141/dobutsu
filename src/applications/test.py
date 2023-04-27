@@ -27,7 +27,7 @@ def run(state: State, step: Step, history: History) -> Tuple[Winner, Step, Histo
     else: history.append(state.turn())
 
     # ループからの離脱
-    if step > 100: return Winner.NO, step, history
+    if step > LIMIT: return Winner.NO, step, history
 
     # 終了判定
     finish = state.get_finish()
