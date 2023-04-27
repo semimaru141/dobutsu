@@ -7,6 +7,9 @@ Piece = int
 Place = int
 CapturedIndex = int
 
+initial_board = [8, 6, 7, 0, 9, 0, 0, 4, 0, 2, 1, 3]
+initial_captured = [0, 0, 0, 0, 0, 0]
+
 class State:
     def __init__(self, board: 'Board', captured: 'Captured'):
         self._board = board
@@ -16,6 +19,12 @@ class State:
     def create(board: list[int], captured: list[int]) -> 'State':
         _board = Board(board)
         _captured = Captured(captured)
+        return State(_board, _captured)
+    
+    @staticmethod
+    def create_initial() -> 'State':
+        _board = Board(initial_board)
+        _captured = Captured(initial_captured)
         return State(_board, _captured)
 
     def getState(self): 

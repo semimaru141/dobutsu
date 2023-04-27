@@ -30,3 +30,9 @@ OP_CHICK_INDEX = 5
 class Finish(Enum):
     WIN = 1
     LOSE = 2
+
+class Winner(Enum):
+    ME = 1
+    OP = -1
+    # draw
+    NO = 0
