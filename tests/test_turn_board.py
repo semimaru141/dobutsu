@@ -1,4 +1,5 @@
-from models.board import State
+from models.state import State
+from models.visualizer import Visualizer
 
 start_board = '''[]
 -------
@@ -47,8 +48,8 @@ class TestTurnBoard:
         captured = [0, 0, 0, 0, 0, 0]
         state = State.create(board, captured)
         turn = state.turn()
-        assert state.getStr() == start_board
-        assert turn.getStr() == start_board
+        assert Visualizer(state).get_state_str() == start_board
+        assert Visualizer(turn).get_state_str() == start_board
 
     # 手番が進んだ状態
     def test_in_progress_board(self):
@@ -56,5 +57,5 @@ class TestTurnBoard:
         captured = [0, 1, 1, 1, 1, 0]
         state = State.create(board, captured)
         turn = state.turn()
-        assert state.getStr() == in_progress_board
-        assert turn.getStr() == in_progress_board_t
+        assert Visualizer(state).get_state_str() == in_progress_board
+        assert Visualizer(turn).get_state_str() == in_progress_board_t

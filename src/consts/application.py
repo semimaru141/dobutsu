@@ -1,5 +1,5 @@
 from enum import Enum
-from models.board import State
+from models.state import State
 
 Step = int
 History = list[State]

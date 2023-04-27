@@ -8,10 +8,11 @@
 - [ ] 「自分のライオンが王手がかかっていないで最終段に到達」という条件が「自分のライオンが最終段に到達して１ターン経過」となっている
 
 # リファクタ
-- [ ] Board、Capturedのファイルが分割されていない
-- [ ] get_next_boardsがutilsに存在する
-- [ ] is_finishがutilsに存在する
-- [ ] 各所に知識が流出している
+- [x] Board、Capturedのファイルが分割されていない
+- [x] get_next_boardsがutilsに存在する
+- [x] is_finishがutilsに存在する
+- [x] 各所に知識が流出している
+- [ ] get_next_boardsが複雑
 
 # テスト
 - [ ] 全体的にいまだ雑な部分がある

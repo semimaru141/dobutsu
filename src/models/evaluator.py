@@ -1,6 +1,5 @@
-from models.board import State
-
-Score = float
+from models.state import State
+from consts.model import *
 
 class Evaluator:
     _evaluator = []

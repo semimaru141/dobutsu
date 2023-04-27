@@ -31,3 +31,16 @@ class Finish(Enum):
     NOT = 0
     WIN = 1
     LOSE = 2
+
+INITIAL_BOARD = [
+    OP_GIR_NUM, OP_LION_NUM, OP_ELE_NUM, 
+    EMPTY, OP_CHICK_NUM, EMPTY, 
+    EMPTY, MY_CHICK_NUM, EMPTY,
+    MY_ELE_NUM, MY_LION_NUM, MY_GIR_NUM
+]
+INITIAL_CAPTURED = [0, 0, 0, 0, 0, 0]
+
+Piece = int
+Place = int
+CapturedIndex = int
+Score = float
