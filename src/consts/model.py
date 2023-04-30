@@ -2,6 +2,7 @@ from enum import Enum
 
 # board
 RANGE_OF_BOARD = 12
+RANGE_OR_PIECE = 11
 
 EMPTY = 0
 MY_LION_NUM = 1

@@ -1,27 +1,23 @@
-from typing import Tuple
 from models.state import State
-from models.evaluator import Evaluator
-from applications.test import History, Step, pick_state_randomly
+from models.learner import Learner
 from consts.model import Finish, Score
-from consts.application import Winner
-from models.file_handler import FileHandler
+from consts.application import Winner, Step
+from utils.pick_state_randomly import pick_state_randomly
 from utils.check_winner import check_winner
 
 TRIAL = 1
 LIMIT = 100
 
 def learn():
-    evaluator = Evaluator.create_zeros()
+    learner = Learner()
     for _ in range(TRIAL):
-        run(evaluator, State.create_initial(), 0)
-    
-    FileHandler(evaluator).save_model('model')
-    
+        run(learner, State.create_initial(), 0)
+    model = learner.make_model()
+    model.save()
 
-def run(evaluator: Evaluator, state: State, step: Step) -> Score:
-
+def run(learner: Learner, state: State, step: Step) -> Score:
     # ループからの離脱
-    if step > LIMIT: return Winner.NO, step
+    if step > LIMIT: return 0
 
     # 終了判定
     finish = state.get_finish()
@@ -33,8 +29,8 @@ def run(evaluator: Evaluator, state: State, step: Step) -> Score:
     # 再帰
     next_states = state.get_next_boards()
     next_state = pick_state_randomly(next_states)
-    score = run(evaluator, next_state.turn(), step + 1)
+    score = run(learner, next_state.turn(), step + 1)
 
     # フィードバック
-    evaluator.learn(state, score)
+    learner.data_add(state, score)
     return score * -0.9
