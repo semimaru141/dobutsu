@@ -1,7 +1,0 @@
-version: '3'
-services:
-  dobutsu:
-    image: dobutsu
-    volumes:
-      - ./:/app
-    command: tail -f /dev/null

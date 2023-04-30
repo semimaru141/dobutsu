@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 numpy = "*"
+tf-nightly = "*"
 
 [dev-packages]
 pytest = "*"

@@ -21,12 +21,6 @@ pipenv shell
 pipenv run run-test
 ```
 
-### 実行方法
-```
-docker build -t dobutsu .
-docker-compose up -d
-```
-
 ## 仕様
 
 ### マスの情報

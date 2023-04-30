@@ -22,11 +22,11 @@ class Learner:
             output.append(data[1])
         return LearnModel(input, output)
     
-    def board_processer(board_array: list[Piece]):
+    def board_processer(self, board_array: list[Piece]):
         input: list[np.ndarray[np.float32]] = []
         for piece in board_array:
             one_hot = np.zeros(RANGE_OR_PIECE, dtype=np.float32)
             one_hot[piece] = 1
-            input.append(input)
-        return np.concatenate(arr for arr in input)
+            input.append(one_hot)
+        return np.concatenate(input)
         
