@@ -27,4 +27,4 @@ class LearnModel:
         return model
         
     def save(self):
-        self._model.save('model')
+        self._model.save_weights('model/dobutsu')
