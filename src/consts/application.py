@@ -1,8 +1,9 @@
 from enum import Enum
+from typing import List
 from models.state import State
 
 Step = int
-History = list[State]
+History = List[State]
 
 class Winner(Enum):
     ME = 1

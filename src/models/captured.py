@@ -1,9 +1,10 @@
+from typing import List
 from consts.model import *
 from models.board import Piece
 
 
 class Captured:
-    def __init__(self, captured: list[int]):
+    def __init__(self, captured: List[int]):
         self._captured = captured
 
     @staticmethod
@@ -29,7 +30,7 @@ class Captured:
         self._captured[index] -= 1
     
     # 先手が使用可能なPieceを取得する
-    def get_my_pieces(self) -> list[Piece]:
+    def get_my_pieces(self) -> List[Piece]:
         return [get_piece_num(capturedIndex) for capturedIndex in range(3) if self._captured[capturedIndex] != 0]
     
     # 先手後手を入れ替える

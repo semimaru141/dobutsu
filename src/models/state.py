@@ -1,4 +1,4 @@
-from typing import Type
+from typing import List, Type
 from models.board import Board
 from models.captured import Captured
 from consts.model import *
@@ -9,7 +9,7 @@ class State:
         self._captured = captured
 
     @staticmethod
-    def create(board: list[int], captured: list[int]) -> 'State':
+    def create(board: List[int], captured: List[int]) -> 'State':
         _board = Board(board)
         _captured = Captured(captured)
         return State(_board, _captured)
@@ -54,7 +54,7 @@ class State:
                 return Finish.NOT
         return Finish.LOSE
     
-    def get_next_boards(self) -> list[Type['State']]:
+    def get_next_boards(self) -> List[Type['State']]:
         res = []
         # 各場所ごとにピースを計算し、各自の動ける箇所から次の盤面を作り出す
         for place in range(RANGE_OF_BOARD):

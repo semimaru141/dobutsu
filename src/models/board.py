@@ -1,7 +1,8 @@
+from typing import List
 from consts.model import *
 
 class Board:
-    def __init__(self, board: list[int]):
+    def __init__(self, board: List[int]):
         self._board = board
     
     @staticmethod
@@ -20,7 +21,7 @@ class Board:
         self._board[place] = piece
 
     # 駒が配置可能なPlaceを取得する
-    def get_empty_places(self) -> list[Place]:
+    def get_empty_places(self) -> List[Place]:
         return [place for place in range(RANGE_OF_BOARD) if self._board[place] == EMPTY]
     
     # 先手後手入れ替える

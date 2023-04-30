@@ -1,5 +1,4 @@
-import tensorflow as tf
-from tensorflow.keras import layers, models
+from tensorflow.python.keras import layers, models
 
 class LearnModel:
     def __init__(self, input, output) -> None:
@@ -18,12 +17,12 @@ class LearnModel:
         model.add(layers.Dense(1, activation='linear'))
 
         # モデルのコンパイル
-        model.compile(optimizer='rmsprop',
+        model.compile(optimizer='adam',
                     loss='sparse_categorical_crossentropy',
                     metrics=['accuracy'])
 
         # モデルの学習
-        model.fit(x_train, y_train, epochs=10, batch_size=len(x_train))
+        model.fit(x_train, y_train, epochs=10)
 
         return model
         

@@ -1,10 +1,18 @@
 # どうぶつ将棋の棋譜コードサンプル
 
 ## 環境構築方法
+### conda
+```
+conda create --name dobutsu python=3.11.2
+conda activate dobutsu
+conda install -c apple tensorflow-deps
+```
+
 ### pipenv install
 ```
 pip install pipenv
 ```
+
 ### package install
 ```
 pipenv install --dev
@@ -48,3 +56,12 @@ pipenv run run-test
 * 3 ひよこ (後手の持ち駒)
 * 4 ぞう (後手の持ち駒)
 * 5 きりん (後手の持ち駒)
+
+## その他
+### インテリセンスの効かせ方(VSCode)
+設定から`settings.json`を開き、以下のような項目を追加する。
+```
+"python.autoComplete.extraPaths": [
+    "/Users/ishii/.local/share/virtualenvs/dobutsu-n43e7yYG/lib/python3.11/site-packages/"
+],
+```
