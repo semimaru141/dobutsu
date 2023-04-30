@@ -1,7 +1,7 @@
 from typing import List, Type
-from models.board import Board
-from models.captured import Captured
-from consts.model import *
+from domains.board import Board
+from domains.captured import Captured
+from consts.domain import *
 
 class State:
     def __init__(self, board: 'Board', captured: 'Captured'):

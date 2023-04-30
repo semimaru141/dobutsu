@@ -1,7 +1,7 @@
-from models.state import State
-from consts.model import *
-from models.board import Board
-from models.captured import Captured
+from domains.state import State
+from consts.domain import *
+from domains.board import Board
+from domains.captured import Captured
 
 c_char = ["E", "G", "C", "e", "g", "c"]
 b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "h"]

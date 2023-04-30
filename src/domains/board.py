@@ -1,5 +1,5 @@
 from typing import List
-from consts.model import *
+from consts.domain import *
 
 class Board:
     def __init__(self, board: List[int]):

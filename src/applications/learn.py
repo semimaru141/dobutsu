@@ -1,11 +1,11 @@
-from models.state import State
-from models.learner import Learner
-from consts.model import Finish, Score
+from domains.state import State
+from domains.learner import Learner
+from consts.domain import Finish, Score
 from consts.application import Winner, Step
 from utils.pick_state_randomly import pick_state_randomly
 from utils.check_winner import check_winner
 
-TRIAL = 1
+TRIAL = 1000
 LIMIT = 100
 
 def learn():

@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import List
-from models.state import State
+from domains.state import State
 
 Step = int
 History = List[State]

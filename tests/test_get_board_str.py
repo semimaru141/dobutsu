@@ -1,5 +1,5 @@
-from models.state import State
-from models.visualizer import Visualizer
+from domains.state import State
+from domains.visualizer import Visualizer
 
 start_board = '''[]
 -------

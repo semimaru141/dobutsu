@@ -1,6 +1,6 @@
 from typing import List
-from consts.model import *
-from models.board import Piece
+from consts.domain import *
+from domains.board import Piece
 
 
 class Captured:

@@ -1,7 +1,7 @@
 from typing import Tuple
-from models.state import State
-from models.visualizer import Visualizer
-from consts.model import Finish
+from domains.state import State
+from domains.visualizer import Visualizer
+from consts.domain import Finish
 from consts.application import History, Step, Winner
 from utils.check_winner import check_winner
 from utils.pick_state_randomly import pick_state_randomly
