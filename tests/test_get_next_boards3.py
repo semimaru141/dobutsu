@@ -33,7 +33,7 @@ class TestGetNextBoards2:
         board = [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
         captured = [0, 0, 0, 0, 0, 0]
         state = State.create(board, captured)
-        next_boards = state.get_next_boards()
+        next_boards = state.get_next_states()
         assert Visualizer(state).get_state_str() == start_board
         assert len(next_boards) == 1
         assert Visualizer(next_boards[0]).get_state_str() == next_board

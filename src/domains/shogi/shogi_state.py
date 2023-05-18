@@ -1,24 +1,27 @@
 from typing import List, Type
-from domains.board import Board
-from domains.captured import Captured
+from domains.shogi.board import Board
+from domains.shogi.captured import Captured
+from domains.shogi.const import *
+from domains.shogi.visualizers.string_visualizer import StringVisualizer
 from consts.domain import *
 
-class State:
+
+class ShogiState:
     def __init__(self, board: 'Board', captured: 'Captured'):
         self._board = board
         self._captured = captured
 
     @staticmethod
-    def create(board: List[int], captured: List[int]) -> 'State':
+    def create(board: List[int], captured: List[int]) -> 'ShogiState':
         _board = Board(board)
         _captured = Captured(captured)
-        return State(_board, _captured)
+        return ShogiState(_board, _captured)
     
     @staticmethod
-    def create_initial() -> 'State':
+    def create_initial() -> 'ShogiState':
         board = Board.create_initial()
         captured = Captured.create_initial()
-        return State(board, captured)
+        return ShogiState(board, captured)
 
     @property
     def state(self): 
@@ -32,13 +35,17 @@ class State:
     def captured(self) -> 'Captured': 
         return self._captured
     
-    def copy(self) -> 'State':
+    def copy(self) -> 'ShogiState':
         # 盤を複製する
-        return State(self._board.copy(), self._captured.copy())
+        return ShogiState(self._board.copy(), self._captured.copy())
     
     def turn(self):
         board, captured = self.state
-        return State(board.turn(), captured.turn())
+        return ShogiState(board.turn(), captured.turn())
+    
+    def get_unique_key(self) -> Key:
+        board, captured = self.state
+        return board.get_unique_key() + captured.get_unique_key() 
 
     def get_finish(self) -> Finish:
         # 自分のLが最終段に存在する または 相手に王手がかかっている場合に勝利となる
@@ -54,7 +61,7 @@ class State:
                 return Finish.NOT
         return Finish.LOSE
     
-    def get_next_boards(self) -> List[Type['State']]:
+    def get_next_states(self) -> List[Type['ShogiState']]:
         res = []
         # 各場所ごとにピースを計算し、各自の動ける箇所から次の盤面を作り出す
         for place in range(RANGE_OF_BOARD):
@@ -79,7 +86,7 @@ class State:
                     board.set_piece(dst_place, MY_HEN_NUM)
                 else:
                     board.set_piece(dst_place, piece)
-                res.append(new_state)
+                res.append(new_state.turn())
         
         # 駒を打つアルゴリズム
         empty_places = self.board.get_empty_places()
@@ -89,8 +96,11 @@ class State:
             board, captured = new_state.state
             board.set_piece(place, piece)
             captured.use_piece(piece)
-            res.append(new_state)
+            res.append(new_state.turn())
         return res
+    
+    def get_string_visualizer(self) -> StringVisualizer:
+        return StringVisualizer(self)
 
 # 移動先を取得する
 def get_move(piece: Piece, place: Place):

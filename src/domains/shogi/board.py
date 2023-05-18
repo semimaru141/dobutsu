@@ -1,5 +1,6 @@
 from typing import List
-from consts.domain import *
+from domains.shogi.const import *
+
 
 class Board:
     def __init__(self, board: List[int]):
@@ -30,6 +31,10 @@ class Board:
         # 2. OPとMYの駒を反転させる
         new_board = [turn_piece(piece) for piece in self._board[::-1]]
         return Board(new_board)
+    
+    def get_unique_key(self) -> str:
+        # 現在のboardに一意なkeyを返す
+        return ''.join(self._board)
 
 turn_piece_dic = {
     EMPTY: EMPTY,

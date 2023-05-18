@@ -1,17 +1,19 @@
-from domains.state import State
-from consts.domain import *
-from domains.board import Board
-from domains.captured import Captured
+from domains.shogi.shogi_state import ShogiState
+from domains.shogi.board import Board
+from domains.shogi.captured import Captured
+from domains.shogi.visualizer import Visualizer
+from domains.shogi.const import Place
 
 c_char = ["E", "G", "C", "e", "g", "c"]
 b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "h"]
 
-class Visualizer:
-    def __init__(self, state: State) -> None:
-        self._state = state
+class StringVisualizer(Visualizer):
+    def __init__(self, state: ShogiState, should_turn: bool) -> None:
+        if should_turn: self._state = state.turn()
+        else: self._state = state
 
     @property
-    def state(self) -> State:
+    def state(self) -> ShogiState:
         return self._state
     
     @property
@@ -22,7 +24,7 @@ class Visualizer:
     def captured(self) -> Captured:
         return self.state.captured
 
-    def get_state_str(self) -> str:
+    def visualize(self) -> str:
         str = ""
 
         # 相手持ち駒

@@ -1,8 +1,9 @@
 import numpy as np
-from domains.learn_model import LearnModel
 from typing import List, Tuple
-from domains.state import State
 from consts.domain import *
+from domains.model.learn_model import LearnModel
+from domains.abstract.state import State
+from domains.shogi.const import *
 
 class Learner:
     _data: List[Tuple[State, Score]]

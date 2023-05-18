@@ -1,9 +1,8 @@
 from enum import Enum
-from typing import List
-from domains.state import State
+from typing import List, Tuple
+from domains.abstract.state import State
 
 Step = int
-History = List[State]
 
 class Winner(Enum):
     ME = 1

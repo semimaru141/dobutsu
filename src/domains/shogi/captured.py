@@ -1,6 +1,6 @@
 from typing import List
 from consts.domain import *
-from domains.board import Piece
+from domains.shogi.const import *
 
 
 class Captured:
@@ -39,7 +39,10 @@ class Captured:
         for index in range(RANGE_OF_CAPTURED):
             new_captured[turn_index(index)] = self._captured[index]
         return Captured(new_captured)
-
+    
+    def get_unique_key(self) -> str:
+        # 現在のcapturedに一意なkeyを返す
+        return ''.join(self._captured)
 
 # 駒を与えると、自分の駒のインデックスを返す
 # 駒取得時・駒使用時の双方から使用される
