@@ -42,7 +42,7 @@ class Captured:
     
     def get_unique_key(self) -> str:
         # 現在のcapturedに一意なkeyを返す
-        return ''.join(self._captured)
+        return ''.join(map(str, self._captured))
 
 # 駒を与えると、自分の駒のインデックスを返す
 # 駒取得時・駒使用時の双方から使用される

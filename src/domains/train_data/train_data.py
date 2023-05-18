@@ -1,3 +1,4 @@
+import pickle
 from consts.domain import *
 from domains.train_data.const import TrainDataDic
 
@@ -12,5 +13,6 @@ class TrainData:
         else:
             return found[0]
         
-    def save(self) -> None:
-        pass
+    def save(self, filename: str = 'test') -> None:
+        with open(f"train_data/{filename}", "wb") as file:
+            pickle.dump(self.dict, file)

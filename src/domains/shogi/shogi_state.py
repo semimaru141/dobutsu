@@ -2,7 +2,6 @@ from typing import List, Type
 from domains.shogi.board import Board
 from domains.shogi.captured import Captured
 from domains.shogi.const import *
-from domains.shogi.visualizers.string_visualizer import StringVisualizer
 from consts.domain import *
 
 
@@ -98,9 +97,6 @@ class ShogiState:
             captured.use_piece(piece)
             res.append(new_state.turn())
         return res
-    
-    def get_string_visualizer(self) -> StringVisualizer:
-        return StringVisualizer(self)
 
 # 移動先を取得する
 def get_move(piece: Piece, place: Place):

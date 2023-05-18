@@ -5,7 +5,6 @@ from domains.shogi.shogi_state import ShogiState
 class History:
     def __init__(self) -> None:
         self.list: List[ShogiState] = []
-        self.pop_count = 0
 
     def add_state(self, data: Tuple[ShogiState, Step]) -> None:
         self.list.append(data)
@@ -14,7 +13,7 @@ class History:
         return self
     
     def __next__(self) -> ShogiState:
-        if  self.pop_count % 2 == 0:
-            return self.list.pop()
+        if len(self.list) > 0:
+            return self.list.pop(0)
         else:
-            return self.list.pop().turn()
+            raise StopIteration

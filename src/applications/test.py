@@ -3,6 +3,7 @@ from domains.shogi.shogi_state import ShogiState
 from consts.domain import Finish
 from consts.application import Winner, Step
 from domains.shogi.history import History
+from domains.shogi.visualizers.string_visualizer import StringVisualizer
 from utils.check_winner import check_winner
 from utils.pick_state_randomly import pick_state_randomly
 
@@ -10,8 +11,8 @@ LIMIT = 100
 
 def test():
     winner, step, history = run(ShogiState.create_initial(), 0, History())
-    for state in history:
-        print(state.get_string_visualizer().visualize())
+    for index, state in enumerate(history):
+        print(StringVisualizer(state, index % 2 == 1).visualize())
     print(f"finished in {step} times")
     if winner == Winner.ME:
         print("me win")
