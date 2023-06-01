@@ -1,10 +1,10 @@
-from domains.abstract.state import State
-from consts.domain import Finish, Score
-from consts.application import Winner, Step
-from domains.shogi.shogi_state import ShogiState
-from domains.train_data.train_data_mc_factory import TrainDataMCFactory
-from utils.pick_state_randomly import pick_state_randomly
-from utils.check_winner import check_winner
+from src.domains.abstract.state import State
+from src.consts.domain import Finish, Score
+from src.consts.application import Winner, Step
+from src.domains.shogi.shogi_state import ShogiState
+from src.domains.train_data.train_data_mc_factory import TrainDataMCFactory
+from src.utils.pick_state_randomly import pick_state_randomly
+from src.utils.check_winner import check_winner
 
 TRIAL = 1000
 LIMIT = 100

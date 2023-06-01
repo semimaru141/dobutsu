@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from domains.abstract.state import State
+from src.domains.abstract.state import State
 
 class Visualizer(ABC):
     @abstractmethod

@@ -1,6 +1,6 @@
 from typing import List, Tuple
-from domains.shogi.const import Step
-from domains.shogi.shogi_state import ShogiState
+from src.domains.shogi.const import Step
+from src.domains.shogi.shogi_state import ShogiState
 
 class History:
     def __init__(self) -> None:

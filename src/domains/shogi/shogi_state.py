@@ -1,8 +1,8 @@
 from typing import List, Type
-from domains.shogi.board import Board
-from domains.shogi.captured import Captured
-from domains.shogi.const import *
-from consts.domain import *
+from src.domains.shogi.board import Board
+from src.domains.shogi.captured import Captured
+from src.domains.shogi.const import *
+from src.consts.domain import *
 
 
 class ShogiState:

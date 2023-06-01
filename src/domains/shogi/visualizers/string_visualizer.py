@@ -1,8 +1,8 @@
-from domains.shogi.shogi_state import ShogiState
-from domains.shogi.board import Board
-from domains.shogi.captured import Captured
-from domains.shogi.visualizer import Visualizer
-from domains.shogi.const import Place
+from src.domains.shogi.shogi_state import ShogiState
+from src.domains.shogi.board import Board
+from src.domains.shogi.captured import Captured
+from src.domains.shogi.visualizer import Visualizer
+from src.domains.shogi.const import Place
 
 c_char = ["E", "G", "C", "e", "g", "c"]
 b_char = [" ", "L", "E", "G", "C", "H", "l", "e", "g", "c", "h"]

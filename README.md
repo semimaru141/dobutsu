@@ -8,25 +8,23 @@ conda activate dobutsu
 conda install -c apple tensorflow-deps
 ```
 
-### pipenv install
+### venv
 ```
-pip install pipenv
+python -m venv .venv
+source .venv/bin/activate
 ```
-
 ### package install
 ```
-pipenv install --dev
+pip install -r requirements_mac.txt
+```
+```
+pip install -r requirements_linux.txt
 ```
 
-## 環境情報
-### 仮想環境に入る方法
-```
-pipenv shell
-```
-
+## 実行方法
 ### テスト実行方法
 ```
-pipenv run run-test
+pytest tests
 ```
 
 ## 仕様

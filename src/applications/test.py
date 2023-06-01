@@ -1,11 +1,11 @@
 from typing import Tuple
-from domains.shogi.shogi_state import ShogiState
-from consts.domain import Finish
-from consts.application import Winner, Step
-from domains.shogi.history import History
-from domains.shogi.visualizers.string_visualizer import StringVisualizer
-from utils.check_winner import check_winner
-from utils.pick_state_randomly import pick_state_randomly
+from src.domains.shogi.shogi_state import ShogiState
+from src.consts.domain import Finish
+from src.consts.application import Winner, Step
+from src.domains.shogi.history import History
+from src.domains.shogi.visualizers.string_visualizer import StringVisualizer
+from src.utils.check_winner import check_winner
+from src.utils.pick_state_randomly import pick_state_randomly
 
 LIMIT = 100
 

@@ -1,5 +1,6 @@
-from domains.state import State
-from domains.visualizer import Visualizer
+from src.domains.shogi.shogi_state import ShogiState
+from src.domains.shogi.visualizers.string_visualizer import StringVisualizer
+
 
 start_board = '''[]
 -------
@@ -32,9 +33,9 @@ class TestGetNextBoards2:
     def test_only_chick(self):
         board = [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
         captured = [0, 0, 0, 0, 0, 0]
-        state = State.create(board, captured)
+        state = ShogiState.create(board, captured)
         next_boards = state.get_next_states()
-        assert Visualizer(state).get_state_str() == start_board
+        assert StringVisualizer(state, False).visualize() == start_board
         assert len(next_boards) == 1
-        assert Visualizer(next_boards[0]).get_state_str() == next_board
+        assert StringVisualizer(next_boards[0], True).visualize() == next_board
 

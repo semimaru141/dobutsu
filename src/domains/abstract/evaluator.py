@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from consts.domain import *
+from src.consts.domain import *
 
 class Evaluator(ABC):
     @abstractmethod

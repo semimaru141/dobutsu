@@ -1,9 +1,9 @@
 from typing import Dict, List
 
-from consts.domain import *
-from domains.abstract.state import State
-from domains.train_data.train_data import TrainData
-from domains.train_data.const import TrainDataDic
+from src.consts.domain import *
+from src.domains.abstract.state import State
+from src.domains.train_data.train_data import TrainData
+from src.domains.train_data.const import TrainDataDic
 
 
 class TrainDataMCFactory():

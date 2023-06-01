@@ -1,5 +1,5 @@
 from typing import List
-from domains.shogi.const import *
+from src.domains.shogi.const import *
 
 
 class Board:

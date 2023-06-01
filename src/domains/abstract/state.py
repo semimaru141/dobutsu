@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Type
 
-from consts.domain import *
+from src.consts.domain import *
 
 class State(ABC):
     @abstractmethod

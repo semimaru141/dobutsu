@@ -1,5 +1,5 @@
-from consts.application import Step, Winner
-from consts.domain import Finish
+from src.consts.application import Step, Winner
+from src.consts.domain import Finish
 
 def check_winner(finish: Finish, step: Step) -> Winner:
     add = 0 if finish == Finish.WIN else 1

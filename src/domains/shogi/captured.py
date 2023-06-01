@@ -1,6 +1,6 @@
 from typing import List
-from consts.domain import *
-from domains.shogi.const import *
+from src.consts.domain import *
+from src.domains.shogi.const import *
 
 
 class Captured:
