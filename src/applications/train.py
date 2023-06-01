@@ -26,8 +26,14 @@ def run(factory: TrainDataMCFactory, state: State, step: Step) -> Score:
     finish = state.get_finish()
     if finish != Finish.NOT: 
         winner = check_winner(finish, step)
-        if winner == Winner.ME: return 1
-        else: return -1
+        if winner == Winner.ME:
+            score = 1
+            factory.data_add(state, score)
+            return score
+        else:
+            score = -1
+            factory.data_add(state, score)
+            return score
 
     # 再帰
     next_states = state.get_next_states()

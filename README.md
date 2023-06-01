@@ -22,6 +22,10 @@ pip install -r requirements_linux.txt
 ```
 
 ## 実行方法
+### 関数実行方法
+```
+python -m src.main
+```
 ### テスト実行方法
 ```
 pytest tests

@@ -7,7 +7,7 @@ class TrainData:
         self.dict = dict
 
     def search_score(self, key: Key) -> Score:
-        found = self.dict[key]
+        found = self.dict.get(key)
         if found == None:
             return 0
         else:
