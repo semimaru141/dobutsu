@@ -1,5 +1,8 @@
 __pycache__
 .pytest_cache
 *.npy
-data/*
+data/**
+!data/**/
+!data/**/.gitkeep
 .venv/
+train_multi.sh
