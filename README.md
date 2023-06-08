@@ -31,6 +31,17 @@ python -m src.main
 pytest tests
 ```
 
+## submodule
+### 同期方法
+```
+git submodule init
+git submodule update
+```
+### mpi実行方法
+```
+mpirun -np 20 ./cps/cps train_multi.sh
+```
+
 ## 仕様
 
 ### マスの情報
