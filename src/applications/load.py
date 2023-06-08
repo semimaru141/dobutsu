@@ -6,7 +6,7 @@ from src.domains.train_data.train_data_file_factory import TrainDataFileFactory
 
 
 def load():
-    train_data = TrainDataFileFactory().create()
+    train_data = TrainDataFileFactory('dump_merged_001.pkl').create()
     evaluator = TrainDataEvaluator(train_data)
 
     initial_state = get_initial()
