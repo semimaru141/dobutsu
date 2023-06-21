@@ -48,5 +48,5 @@ class TestMerge:
             ]
         })
         merged = TrainDataMergeFactory([train_data1, train_data2]).create()
-        assert len(merged.get_size()) == 3
+        assert merged.get_size() == 3
 

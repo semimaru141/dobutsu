@@ -34,7 +34,7 @@ class Board:
     
     def get_unique_key(self) -> str:
         # 現在のboardに一意なkeyを返す
-        return ''.join(map(str, self._board))
+        return ''.join(map(lambda x: str(x) if x != 10 else 'a', self._board))
 
 turn_piece_dic = {
     EMPTY: EMPTY,
