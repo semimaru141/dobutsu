@@ -1,29 +1,11 @@
-from src.domains.ready_data.ready_data import ReadyData
-from tensorflow.python.keras import layers, models
+from src.consts.domain import *
 
-class Model:
-    def __init__(self, ready_data: ReadyData) -> None:
-        self.ready_data = ready_data
+class Model():
+    def __init__(self, model):
+        self.model = model
 
-    def learn(self):
-        x_train = self._input
-        y_train = self._output
+    def save(self, filename: str = 'default'):
+        self.model.save('data/model/' + filename)
 
-        # モデルの定義
-        model = models.Sequential()
-        model.add(layers.Dense(132, activation='relu'))
-        model.add(layers.Dense(64, activation='relu'))
-        model.add(layers.Dense(1, activation='linear'))
-
-        # モデルのコンパイル
-        model.compile(optimizer='adam',
-                    loss='mean_absolute_error',
-                    metrics=['accuracy'])
-
-        # モデルの学習
-        model.fit(x_train, y_train, epochs=10)
-
-        return model
-        
-    def save(self):
-        self._model.save_weights('model/dobutsu')
+    def search_score(key: Key) -> Score:
+        return 0

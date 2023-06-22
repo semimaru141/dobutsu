@@ -7,3 +7,5 @@ class Finish(Enum):
     NOT = 0
     WIN = 1
     LOSE = 2
+
+SIZE_OF_ONEHOT_VECTOR = 11

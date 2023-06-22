@@ -1,6 +1,7 @@
 import numpy as np
-from src.domains.ready_data.ready_data import ReadyData, one_hot_encode, proccess_key
+from src.domains.ready_data.ready_data import ReadyData
 from src.domains.train_data.train_data import TrainData
+from src.utils.key_handler import one_hot_encode, proccess_key
 
 key = '867090040213000000'
 answer = [
