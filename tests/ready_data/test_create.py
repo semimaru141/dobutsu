@@ -46,6 +46,6 @@ class TestCreate:
         train_data = TrainData({
             a_key: [0.5, 3]
         })
-        ready_data = ReadyData(train_data)
+        ready_data = ReadyData.create_from_train_data(train_data)
         assert np.allclose(ready_data.x, [a_answer])
         assert np.allclose(ready_data.y, [0.5])
