@@ -11,19 +11,21 @@ class ReadyData:
 
     @staticmethod
     def create_from_train_data(data: TrainData) -> 'ReadyData':
-        x = np.array([])
-        y = np.array([])
+        x = []
+        y = []
         for key, value in data.dict.items():
-            x = np.append(x, proccess_key(key))
-            y = np.append(y, value[0])
+            x.append(proccess_key(key))
+            y.append(value[0])
+        x = np.array(x, dtype=np.int8)
+        y = np.array(y, dtype=np.float32)
         return ReadyData(x, y)
-    
+
     @staticmethod
     def create_from_file(filename: str = 'default'):
-        x = np.load('data/ready_data/' + filename + '_x')
-        y = np.load('data/ready_data/' + filename + '_x')
+        data = np.load('data/ready_data/' + filename + '.npz')
+        x = data['arr_0']
+        y = data['arr_1']
         return ReadyData(x, y)
 
     def save(self, filename: str = 'default'):
-        np.savez('data/ready_data/' + filename + '_x', self.x)
-        np.savez('data/ready_data/' + filename + '_y', self.y)
+        np.savez_compressed('data/ready_data/' + filename + '.npz', self.x, self.y)

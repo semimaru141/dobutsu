@@ -6,7 +6,7 @@ class ModelLearnFactory:
     def __init__(self, ready_data: ReadyData) -> None:
         self.ready_data = ready_data
 
-    def learn(self) -> 'Model':
+    def create(self) -> 'Model':
         x = self.ready_data.x
         y = self.ready_data.y
 

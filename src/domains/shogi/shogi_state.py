@@ -3,7 +3,7 @@ from src.domains.shogi.board import Board
 from src.domains.shogi.captured import Captured
 from src.domains.shogi.const import *
 from src.consts.domain import *
-
+from src.utils.key_handler import key_to_state
 
 class ShogiState:
     def __init__(self, board: 'Board', captured: 'Captured'):
@@ -20,6 +20,13 @@ class ShogiState:
     def create_initial() -> 'ShogiState':
         board = Board.create_initial()
         captured = Captured.create_initial()
+        return ShogiState(board, captured)
+    
+    @staticmethod
+    def from_key(key: Key) -> 'ShogiState':
+        k = key_to_state(key)
+        board = Board(k[:12])
+        captured = Captured(k[12:])
         return ShogiState(board, captured)
 
     @property
