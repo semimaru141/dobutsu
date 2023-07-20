@@ -30,7 +30,7 @@ class ImageVisualizer(Visualizer):
     def captured(self) -> Captured:
         return self.state.captured
     
-    def visualize(self):
+    def visualize(self) -> Image:
         # 盤面の画像を作成します
         cell_with_padding = cell_size + padding
         board_h_size = board_h_count * cell_size + padding * (board_h_count - 1)
@@ -55,7 +55,7 @@ class ImageVisualizer(Visualizer):
                 draw.rectangle([(x1, y1 + capture_h_size), (x2, y2 + capture_h_size)], fill="lightgray")
 
         op_count = 0
-        for i, count in enumerate(self.captured._captured[:3]):
+        for i, count in enumerate(self.captured._captured[3:]):
             if count == 0: continue
             piece_image = self.get_image(get_piece_num(i)).resize((capture_size, capture_size))
             for _ in range(count):
@@ -71,16 +71,14 @@ class ImageVisualizer(Visualizer):
             image.paste(piece_image, (x, y + capture_h_size))
 
         my_count = 0
-        for i, count in enumerate(self.captured._captured[3:]):
+        for i, count in enumerate(self.captured._captured[:3]):
             if count == 0: continue
             piece_image = self.get_image(get_piece_num(i)).resize((capture_size, capture_size))
             for _ in range(count):
                 x = my_count * (capture_size + padding)
                 image.paste(piece_image, (x, board_h_size + capture_h_size + padding))
                 my_count += 1
-
-        # 盤面の画像を保存します
-        image.save("dobutsu_shogi_board.png")
+        return image
 
     def get_image(self, piece):
         if piece == MY_LION_NUM:
@@ -104,4 +102,3 @@ class ImageVisualizer(Visualizer):
         elif piece == OP_HEN_NUM:
             url = 'hen_r.png'        
         return Image.open("assets/" + url)
-

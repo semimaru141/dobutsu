@@ -64,7 +64,10 @@ def parse_piece(piece: Piece) -> CapturedIndex:
 cap_index_to_piece_dic = {
     MY_ELE_INDEX: MY_ELE_NUM,
     MY_GIR_INDEX: MY_GIR_NUM,
-    MY_CHICK_INDEX: MY_CHICK_NUM
+    MY_CHICK_INDEX: MY_CHICK_NUM,
+    OP_ELE_INDEX: MY_ELE_NUM,
+    OP_GIR_INDEX: MY_GIR_NUM,
+    OP_CHICK_INDEX: MY_CHICK_NUM
 }
 
 def get_piece_num(index: CapturedIndex) -> Piece:
