@@ -12,8 +12,10 @@ class ModelLearnFactory:
 
         # モデルの定義
         model = models.Sequential()
-        model.add(layers.Dense(132, activation='relu'))
-        model.add(layers.Dense(64, activation='relu'))
+        model.add(layers.Reshape((3, 4, 11), input_shape=(132,)))
+        model.add(layers.Conv2D(32, (3, 3), activation='relu'))
+        model.add(layers.Flatten())
+        model.add(layers.Dense(32, activation='relu'))
         model.add(layers.Dense(1, activation='linear'))
 
         # モデルのコンパイル
@@ -22,6 +24,6 @@ class ModelLearnFactory:
                     metrics=['accuracy'])
 
         # モデルの学習
-        model.fit(x, y, epochs=10)
+        model.fit(x, y, epochs=700, batch_size=1024)
 
         return Model(model)
