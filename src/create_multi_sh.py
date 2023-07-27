@@ -9,10 +9,11 @@ def generate_random_string(length):
 
 def write_file():
     with open(TARGET_FILE, "w") as file:
-        for i in range(1, 11):
+        for i in range(1, 61):
             seed = generate_random_string(10)
             filename = '0' * (3 - len(str(i)))  + str(i)
-            file.write(f"python -m src.train_multi 100 {seed} dump_{filename}.pkl\n")
+            # 10000000試合 = 4h
+            file.write(f"python3 -m src.train_multi 20000000 {seed} dump_{filename}.pkl\n")
 
 if __name__ == "__main__":
     write_file()

@@ -43,4 +43,4 @@ def run(factory: TrainDataMCFactory, state: State, step: Step) -> Score:
 
     # フィードバック
     factory.data_add(state, score)
-    return score * -0.9
+    return score * -0.95
