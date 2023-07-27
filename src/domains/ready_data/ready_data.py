@@ -29,3 +29,7 @@ class ReadyData:
 
     def save(self, filename: str = 'default'):
         np.savez_compressed('data/ready_data/' + filename + '.npz', self.x, self.y)
+
+    def clone_with_rand_y(self) -> 'ReadyData':
+        rand_y = np.random.random(len(self.y)) * 2.0 - 1.0
+        return ReadyData(self.x, rand_y)
