@@ -22,6 +22,6 @@ class ModelLearnFactory:
                     metrics=['accuracy'])
 
         # モデルの学習
-        model.fit(x, y, epochs=10)
+        model.fit(x, y, epochs=100, batch_size=1024)
 
         return Model(model)
