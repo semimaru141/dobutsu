@@ -22,6 +22,9 @@ class TrainData:
     
     def get_size(self) -> int:
         return len(self.dict)
+    
+    def get_except_one_appearance_size(self) -> int:
+        return len([value for value in self.dict.values() if value[1] > 1])
 
     def save(self, filename: str = 'test') -> None:
         with open(f"data/train_data/{filename}", "wb") as file:
