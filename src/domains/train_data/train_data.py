@@ -1,4 +1,5 @@
 import pickle
+from typing import Dict
 from src.consts.domain import *
 from src.domains.train_data.const import AppearanceCount, TrainDataDic
 
@@ -27,5 +28,5 @@ class TrainData:
         return len([value for value in self.dict.values() if value[1] > 1])
 
     def save(self, filename: str = 'test') -> None:
-        with open(f"data/train_data/{filename}", "wb") as file:
+        with open(f"data/train_data/{filename}.pkl", "wb") as file:
             pickle.dump(self.dict, file)

@@ -8,7 +8,7 @@ class TrainDataFileFactory:
         self._read(filename)
 
     def _read(self, filename: str) -> None:
-        with open(f"data/train_data/{filename}", "rb") as file:
+        with open(f"data/train_data/{filename}.pkl", "rb") as file:
             self._data: TrainDataDic = pickle.load(file)
 
     def create(self) -> TrainData:
