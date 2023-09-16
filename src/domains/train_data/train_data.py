@@ -26,6 +26,22 @@ class TrainData:
     
     def get_except_one_appearance_size(self) -> int:
         return len([value for value in self.dict.values() if value[1] > 1])
+    
+    def compress(self) -> 'TrainData':
+        ret: TrainDataDic = {}
+        for key, value in self.dict.items():
+            if value[1] > 1:
+                ret[key] = value
+        return TrainData(ret)
+    
+    def show_appearance_distribution(self) -> Dict[AppearanceCount, int]:
+        distribution = {}
+        for value in self.dict.values():
+            if value[1] in distribution:
+                distribution[value[1]] += 1
+            else:
+                distribution[value[1]] = 1
+        return distribution
 
     def save(self, filename: str = 'test') -> None:
         with open(f"data/train_data/{filename}.pkl", "wb") as file:
