@@ -13,7 +13,7 @@ def write_file():
             seed = generate_random_string(10)
             filename = '0' * (3 - len(str(i)))  + str(i)
             # 10000000試合 = 4h
-            file.write(f"python3 -m src.train_multi 20000000 {seed} dump_{filename}.pkl\n")
+            file.write(f"python3 -m src.train_multi 20000000 {seed} dump_{filename}\n")
 
 if __name__ == "__main__":
     write_file()
