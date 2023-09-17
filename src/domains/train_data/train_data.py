@@ -30,7 +30,7 @@ class TrainData:
     def compress(self) -> 'TrainData':
         ret: TrainDataDic = {}
         for key, value in self.dict.items():
-            if value[1] > 1:
+            if value[1] > COMPRESSION_THRESHOLD:
                 ret[key] = value
         return TrainData(ret)
     
