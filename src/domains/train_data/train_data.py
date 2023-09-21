@@ -51,7 +51,7 @@ class TrainData:
     def show_score_distribution(self, interval = 0.1) -> Dict[str, int]:
         scores = [value[0] for value in self.dict.values()]
         # 区間の初期化
-        bins = [-1 + i * interval for i in range(int(2/interval) + 1)]
+        bins = [-1 + i * interval for i in range(int(2/interval) + 2)]
         distribution = {f"{bins[i]:.2f} to {bins[i+1]:.2f}": 0 for i in range(len(bins) - 1)}
         
         # スコアの数を数える
