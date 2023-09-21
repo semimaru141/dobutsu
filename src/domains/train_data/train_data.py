@@ -55,8 +55,8 @@ class TrainData:
         distribution = {f"{bins[i]:.2f} to {bins[i+1]:.2f}": 0 for i in range(len(bins) - 1)}
         
         # スコアの数を数える
-        for i in range(len(bins) - 1):
-            for score in scores:
+        for score in scores:
+            for i in range(len(bins) - 1):
                 if bins[i] <= score < bins[i + 1]:
                     distribution[f"{bins[i]:.2f} to {bins[i+1]:.2f}"] += 1
                     break
