@@ -34,6 +34,7 @@ class TrainData:
                 ret[key] = value
         return TrainData(ret)
     
+    # 出現回数の分布を返す
     def show_appearance_distribution(self) -> Dict[AppearanceCount, int]:
         distribution = {}
         for value in self.dict.values():
@@ -41,6 +42,24 @@ class TrainData:
                 distribution[value[1]] += 1
             else:
                 distribution[value[1]] = 1
+        return distribution
+    
+    '''
+    スコアの分布を返す
+    interval: 区間の大きさ
+    '''
+    def show_score_distribution(self, interval = 0.1) -> Dict[str, int]:
+        scores = [value[0] for value in self.dict.values()]
+        # 区間の初期化
+        bins = [-1 + i * interval for i in range(int(2/interval) + 2)]
+        distribution = {f"{bins[i]:.2f} to {bins[i+1]:.2f}": 0 for i in range(len(bins) - 1)}
+        
+        # スコアの数を数える
+        for score in scores:
+            for i in range(len(bins) - 1):
+                if bins[i] <= score < bins[i + 1]:
+                    distribution[f"{bins[i]:.2f} to {bins[i+1]:.2f}"] += 1
+                    break
         return distribution
 
     def save(self, filename: str = 'test') -> None:
