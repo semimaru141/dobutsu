@@ -5,8 +5,8 @@ from src.domains.train_data.train_data_evaluator import TrainDataEvaluator
 from src.domains.train_data.train_data_file_factory import TrainDataFileFactory
 
 
-def load():
-    train_data = TrainDataFileFactory('dump_merged_001').create()
+def load(filename = 'default'):
+    train_data = TrainDataFileFactory(filename).create()
     evaluator = TrainDataEvaluator(train_data)
 
     initial_state = get_initial()

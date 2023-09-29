@@ -1,5 +1,5 @@
 import argparse
-from src.applications.load import load
+from src.applications.test import test
 
 def get_args() -> str:
     parser = argparse.ArgumentParser()
@@ -10,4 +10,4 @@ def get_args() -> str:
 
 if __name__ == "__main__":
     filename = get_args()
-    load(filename)
+    test(filename)

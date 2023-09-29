@@ -1,4 +1,13 @@
+import argparse
 from src.applications.read_model import read_model
 
+def get_args() -> str:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', type=str)
+
+    args = parser.parse_args()
+    return args.filename
+
 if __name__ == "__main__":
-    read_model()
+    filename = get_args()
+    read_model(filename)
