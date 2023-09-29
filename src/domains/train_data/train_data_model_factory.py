@@ -4,6 +4,7 @@ import numpy as np
 from src.consts.domain import *
 from src.domains.abstract.state import State
 from src.domains.model.model import Model
+from src.domains.model.model_evaluator import ModelEvaluator
 from src.domains.train_data.train_data import TrainData
 from src.domains.train_data.const import TrainDataDic
 
@@ -11,9 +12,9 @@ from src.domains.train_data.const import TrainDataDic
 class TrainDataModelFactory():
     _data: Dict[Key, List[Score]]
 
-    def __init__(self, model: Model) -> None:
+    def __init__(self, model_evaluator: ModelEvaluator) -> None:
         self._data = {}
-        self.model = model
+        self.model_evaluator = model_evaluator
 
     def data_add(self, state: State, score: Score) -> None:
         key = state.get_unique_key()
@@ -23,7 +24,7 @@ class TrainDataModelFactory():
             self._data[key] = [score]
 
     def pick_state(self, states: List[State]) -> State:
-        scores = [self.model.search_score(state.get_unique_key())[0] for state in states]
+        scores = [self.model_evaluator.search_score(state.get_unique_key()) for state in states]
         probabilities = self._calc_probabilities(scores)
         selected_state = np.random.choice(states, p=probabilities)
         return selected_state

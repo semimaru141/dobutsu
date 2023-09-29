@@ -12,4 +12,4 @@ class Model():
     def search_score(self, key: Key) -> Score:
         x = np.array([proccess_key(key)], dtype=np.float32)
         t = self.model(x, training=False)
-        return t[0]
+        return t[0][0]
