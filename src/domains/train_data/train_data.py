@@ -23,6 +23,13 @@ class TrainData:
     
     def get_size(self) -> int:
         return len(self.dict)
+
+    # このtrain_dataを生成するのに到達した局面数
+    def get_predicted_count(self) -> int:
+        count = 0
+        for value in self.dict.values():
+            count += value[1]
+        return count
     
     def get_except_one_appearance_size(self) -> int:
         return len([value for value in self.dict.values() if value[1] > 1])

@@ -2,10 +2,10 @@ import argparse
 from typing import Tuple
 from src.applications.train_multi_model import train_multi_model
 
-def get_args() -> Tuple[int, str, str, str]:
+def get_args() -> Tuple[int, int, str, str]:
     parser = argparse.ArgumentParser()
     parser.add_argument('trial', type=int)
-    parser.add_argument('seed', type=str)
+    parser.add_argument('seed', type=int)
     parser.add_argument('filename', type=str)
     parser.add_argument('model_name', type=str)
 

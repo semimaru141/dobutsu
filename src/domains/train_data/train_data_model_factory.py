@@ -23,14 +23,14 @@ class TrainDataModelFactory():
             self._data[key] = [score]
 
     def pick_state(self, states: List[State]) -> State:
-        scores = [self.model.search_score(state.get_unique_key()) for state in states]
+        scores = [self.model.search_score(state.get_unique_key())[0] for state in states]
         probabilities = self._calc_probabilities(scores)
         selected_state = np.random.choice(states, p=probabilities)
         return selected_state
     
     def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
         # softmax関数で算出
-        exp_scores = np.exp(scores)
+        exp_scores = np.exp(np.array(scores) * -1)
         return exp_scores / np.sum(exp_scores)
 
     def create(self) -> TrainData:

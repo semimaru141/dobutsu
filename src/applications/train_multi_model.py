@@ -7,13 +7,14 @@ from src.domains.shogi.shogi_state import ShogiState
 from src.domains.train_data.train_data_model_factory import TrainDataModelFactory
 
 LIMIT = 100
+base_key = '060820021000000012'
 
 def train_multi_model(trial: int, seed: str, filename: str, model_name: str):
     np.random.seed(seed)
     model = ModelFileFactory(model_name).create()
     factory = TrainDataModelFactory(model)
     for _ in range(trial):
-        run(factory, ShogiState.create_initial(), 0)
+        run(factory, ShogiState.from_key(base_key), 0)
     train_data = factory.create()
     print(train_data)
     train_data.save(filename)
