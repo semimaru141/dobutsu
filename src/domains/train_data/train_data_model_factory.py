@@ -31,7 +31,7 @@ class TrainDataModelFactory():
     
     def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
         # softmax関数で算出
-        exp_scores = np.exp(np.array(scores) * -1)
+        exp_scores = np.exp(np.array(scores) * -1 * SOFTMAX_TEMPERATURE)
         return exp_scores / np.sum(exp_scores)
 
     def create(self) -> TrainData:
