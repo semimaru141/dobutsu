@@ -38,7 +38,7 @@ def run(factory: TrainDataModelFactory, state: State, step: Step) -> Score:
 
     # 再帰
     next_states = state.get_next_states()
-    next_state = factory.pick_state(next_states)
+    next_state = factory.pick_state(state, next_states)
     score = run(factory, next_state, step + 1) * -0.95
 
     # フィードバック
