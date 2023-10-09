@@ -30,6 +30,9 @@ python -m src.main
 ```
 pytest tests
 ```
+### ベンチマーク実行
+python -m benchmark.test
+
 
 ## submodule
 ### 同期方法
