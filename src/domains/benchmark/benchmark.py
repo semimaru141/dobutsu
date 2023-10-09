@@ -1,9 +1,16 @@
 from typing import List
 import json
-from src.consts.domain import Key
 from src.domains.abstract.evaluator import Evaluator
 from src.domains.benchmark.benchmark_data import BenchmarkData
+from src.domains.benchmark.benchmark_result import BenchmarkResult
 from src.domains.shogi.shogi_state import ShogiState
+
+DATA = "data"
+CHECKMATE = "詰み"
+ONE_STEP = "1手詰め"
+BENCHMARK_KEYS = [CHECKMATE, ONE_STEP]
+X = "x"
+YS = "ys"
 
 class Benchmark():
     def __init__(self, evaluator: Evaluator, filename: str = 'default'):
@@ -13,15 +20,18 @@ class Benchmark():
     def _read(self, filename: str) -> List[BenchmarkData]:
         with open('benchmark/' + filename + '.json') as f:
             datas = json.load(f)['data']
-            return [BenchmarkData(data['x'], data['y'], self.evaluator) for data in datas]
+
+            benchmark_datas = []
+            for key in BENCHMARK_KEYS:
+                benchmark_datas += [BenchmarkData(data[X], data[YS]) for data in datas[key]]
+            return benchmark_datas
         
-    def run(self) -> None:
-        succeed = []
-        failed = []
+    def run(self) -> BenchmarkResult:
+        succeed: List[BenchmarkData] = []
+        failed: List[BenchmarkData] = []
         for data in self.data:
             if data.check(self.evaluator):
                 succeed.append(data)
             else:
                 failed.append(data)
-        print('succeed: ' + str(len(succeed)))
-        print('failed: ' + str(len(failed)))
+        return BenchmarkResult(succeed, failed)
