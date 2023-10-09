@@ -40,16 +40,15 @@ class TrainDataModelFactory():
         counts = get_appearance_count(keys)
         ucb = UCB_COEFFICIENT * np.sqrt(original_log / counts)
         scores = search_score(keys) * -1.0 + ucb
-        
         return scores
     
-    # その局面が出現した回数を返す
+    # その局面が出現した回数を返す (現在の探索回数も含むため、+1している)
     def _get_apearance_count(self, key: Key) -> AppearanceCount:
         found = self._data.get(key)
         if found == None:
-            return 0
+            return 1
         else:
-            return len(found)
+            return len(found) + 1
     
     # スコアから選出される確率を算出
     def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
