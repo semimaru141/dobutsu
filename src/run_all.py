@@ -21,4 +21,4 @@ if __name__ == "__main__":
     train_multi_model(trial, seed, filename, model_name)
     compress_train_data(filename, compressed_filename)
     format_data(compressed_filename, filename)
-    make_model(filename, filename)
+    make_model(filename, filename, model_name)
