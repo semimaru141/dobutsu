@@ -1,4 +1,4 @@
-from src.applications.merge_trains import merge
+from src.applications.merge_train_data import merge_train_data
 
 if __name__ == "__main__":
-    merge()
+    merge_train_data()
