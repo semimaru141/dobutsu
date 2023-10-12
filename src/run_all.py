@@ -22,7 +22,7 @@ def run_mcts(trial: int, seed: int, filename: str):
     train_multi(trial, seed, filename)
     compress_train_data(filename, compressed_filename)
     format_data(compressed_filename, filename)
-    make_model(filename, filename, model_name)
+    make_model(filename, filename)
 
 def run_model(trial: int, seed: int, filename: str, model_name: str):
     compressed_filename = filename + '_compressed'
@@ -31,7 +31,7 @@ def run_model(trial: int, seed: int, filename: str, model_name: str):
     compress_train_data(filename, compressed_filename)
     merge_train_data([compressed_filename, model_name], merged_filename)
     format_data(merged_filename, filename)
-    make_model(filename, filename, model_name)
+    make_model(filename, filename)
 
 if __name__ == "__main__":
     trial, seed, filename, model_name = get_args()
