@@ -2,6 +2,7 @@ from enum import Enum
 
 Score = float
 Key = str
+SelectionProbability = float
 
 class Finish(Enum):
     NOT = 0
