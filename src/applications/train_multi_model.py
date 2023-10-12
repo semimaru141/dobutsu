@@ -1,7 +1,6 @@
 from src.domains.runner.train_data_strategy_factory_runner import TrainDataStrategyFactoryRunner
 from src.domains.shogi.shogi_state import ShogiState
 
-LIMIT = 100
 base_key = '060820021000000012'
 target_key = '000600773010012000'
 
