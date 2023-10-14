@@ -52,11 +52,13 @@ class HistoryRunner():
             self.history.data_add(state, score, probability)
             winner = self.check_winner(finish, step)
             self.set_winner(winner)
+            return score
         elif finish == Finish.LOSE:
             score = -1
             self.history.data_add(state, score, probability)
             winner = self.check_winner(finish, step)
             self.set_winner(winner)
+            return score
 
         # 再帰
         next_states = state.get_next_states()

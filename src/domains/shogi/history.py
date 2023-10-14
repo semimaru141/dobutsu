@@ -23,7 +23,7 @@ class History(Stockable):
             raise StopIteration
         
     def print(self) -> None:
-        for state, score, probability in self:
-            print(StringVisualizer(state, False).visualize())
+        for i, (state, score, probability) in enumerate(self):
+            print(StringVisualizer(state, i % 2 == 1).visualize())
             print(f'probability: {probability}')
             print(f'score: {score}')

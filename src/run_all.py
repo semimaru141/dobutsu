@@ -18,7 +18,7 @@ def get_args() -> Tuple[int, int, str, Union[str, None]]:
     return args.trial, args.seed, args.filename, args.model_name
 
 def run_mcts(trial: int, seed: int, filename: str):
-    compressed_filename = filename + '_compressed'
+    compressed_filename = filename + '_merged'
     train_multi(trial, seed, filename)
     compress_train_data(filename, compressed_filename)
     format_data(compressed_filename, filename)
@@ -27,9 +27,11 @@ def run_mcts(trial: int, seed: int, filename: str):
 def run_model(trial: int, seed: int, filename: str, model_name: str):
     compressed_filename = filename + '_compressed'
     merged_filename = filename + '_merged'
+    pre_merged_filaname = model_name + '_merged'
+
     train_multi_model(trial, seed, filename, model_name)
     compress_train_data(filename, compressed_filename)
-    merge_train_data([compressed_filename, model_name], merged_filename)
+    merge_train_data([compressed_filename, pre_merged_filaname], merged_filename)
     format_data(merged_filename, filename)
     make_model(filename, filename)
 
