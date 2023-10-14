@@ -168,5 +168,24 @@ def get_move(piece: Piece, place: Place):
             return [-4, -3, -2, -1, 1]
         elif place == 11:
             return [-4, -3, -1]
+    elif piece == MY_HEN_NUM:
+        if place == 4 or place == 7:
+            return [-4, -3, -2, -1, 1, 3]
+        elif place == 0:
+            return [1, 3]
+        elif place == 1:
+            return [-1, 1, 3]
+        elif place == 2:
+            return [-1, 3]
+        elif place == 3 or place == 6:
+            return [-3, -2, 1, 3]
+        elif place == 5 or place == 8:
+            return [-4, -3, -1, 3]
+        elif place == 9:
+            return [-3, -2, 1]
+        elif place == 10:
+            return [-4, -3, -2, -1, 1]
+        elif place == 11:
+            return [-4, -3, -1]
     else: return []
 
