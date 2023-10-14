@@ -11,7 +11,7 @@ def make_model(read_filename: str = 'default', output_filename = 'default', base
         new_model = _create_from_model(read_filename, base_model_name)
     new_model.save(output_filename)
 
-def _create_from_scratch(read_filename: str, ) -> Model:
+def _create_from_scratch(read_filename: str) -> Model:
     ready_data = ReadyData.create_from_file(read_filename)
     return ModelLearnFactory(ready_data).create()
 
