@@ -17,5 +17,17 @@ class BenchmarkData:
                 return True
         return False
 
+    def test(self) -> bool:
+        keys = [state.get_unique_key() for state in ShogiState.from_key(self.x).get_next_states()]
+        for y_key in self.ys:
+            if y_key in keys:
+                continue
+            else:
+                return False
+        return True
+
     def evaluate(self, key: Key, evaluator: Evaluator) -> Score:
         return evaluator.search_score(key)
+    
+    def print(self) -> None:
+        print(f"x_key: {self.x}")
