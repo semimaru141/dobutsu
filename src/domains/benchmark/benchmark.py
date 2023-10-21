@@ -2,8 +2,7 @@ from typing import Dict, List
 import json
 from src.domains.abstract.evaluator import Evaluator
 from src.domains.benchmark.benchmark_data import BenchmarkData
-from src.domains.benchmark.benchmark_result import BenchmarkResult
-from src.domains.shogi.shogi_state import ShogiState
+from src.domains.benchmark.benchmark_result_list import BenchmarkResultList
 
 DATA = "data"
 CHECKMATE = "詰み"
@@ -39,15 +38,9 @@ class Benchmark():
                     return False
         return True
         
-    def run(self, evaluator: Evaluator) -> Dict[str, BenchmarkResult]:
-        dic: Dict[str, BenchmarkResult] = {}
+    def run(self, evaluator: Evaluator) -> List[BenchmarkResultList]:
+        list: List[BenchmarkResultList] = []
         for key, datas in self.data.items():
-            succeed: List[BenchmarkData] = []
-            failed: List[BenchmarkData] = []
-            for data in datas:
-                if data.check(evaluator):
-                    succeed.append(data)
-                else:
-                    failed.append(data)
-            dic[key] = BenchmarkResult(succeed, failed)
-        return dic
+            results = [data.check(evaluator) for data in datas]
+            list.append(BenchmarkResultList(key, results))
+        return list

@@ -5,6 +5,7 @@ from src.domains.shogi.captured import Captured, get_piece_num
 from src.domains.shogi.const import *
 from src.domains.shogi.shogi_state import ShogiState
 from src.domains.shogi.visualizer import Visualizer
+from src.domains.shogi.visualizers.image import Image as MyImage
 
 # 盤面のサイズとセルのサイズを設定します
 board_w_count = 3  # 盤面のサイズ（8x8）
@@ -30,7 +31,7 @@ class ImageVisualizer(Visualizer):
     def captured(self) -> Captured:
         return self.state.captured
     
-    def visualize(self) -> Image:
+    def visualize(self) -> MyImage:
         # 盤面の画像を作成します
         cell_with_padding = cell_size + padding
         board_h_size = board_h_count * cell_size + padding * (board_h_count - 1)
@@ -78,7 +79,7 @@ class ImageVisualizer(Visualizer):
                 x = my_count * (capture_size + padding)
                 image.paste(piece_image, (x, board_h_size + capture_h_size + padding))
                 my_count += 1
-        return image
+        return MyImage(image)
 
     def get_image(self, piece):
         if piece == MY_LION_NUM:
