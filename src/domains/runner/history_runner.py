@@ -66,12 +66,12 @@ class HistoryRunner():
         self.run(next_state, step + 1, new_probability)
 
         # フィードバック
-        self.history.data_add(state, score, probability)
+        self.history.data_add(state, score * -1, probability)
         return score
     
     def check_winner(self, finish: Finish, step: Step) -> Winner:
         add = 0 if finish == Finish.WIN else 1
-        if (step + add) % 2 == 1: return Winner.ME
+        if (step + add) % 2 == 0: return Winner.ME
         else: return Winner.OP
         
     def get_history(self) -> History:
