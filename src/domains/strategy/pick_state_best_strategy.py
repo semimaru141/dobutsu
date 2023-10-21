@@ -27,6 +27,12 @@ class PickStateBestStrategy(PickStateStrategy):
                 return next_states[i], score, probabilities[i]
         raise 'state not found error'
     
+    def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
+        scores = [self._evaluate(state) for state in next_states]
+        probabilities = self._calc_probabilities(scores)
+        result = sorted(zip(next_states, scores, probabilities), key=lambda x: x[1])
+        return result
+    
         # スコアから選出される確率を算出
     def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
         # softmax関数で算出

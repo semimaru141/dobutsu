@@ -10,3 +10,6 @@ class PickStateRandomlyStrategy(PickStateStrategy):
     
     def pick_state_verbose(self, original_state: State, next_states: List[State], data: Dict[Key, List[Score]]) -> Tuple[State, Score, SelectionProbability]:
         return np.random.choice(next_states), 0, 1 / len(next_states)
+    
+    def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
+        return [(state, 0, 1 / len(next_states)) for state in next_states]

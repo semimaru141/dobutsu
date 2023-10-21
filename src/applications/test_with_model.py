@@ -4,7 +4,7 @@ from src.consts.application import Winner
 
 def test_with_model(model_filename: str):
     runner = HistoryRunner.create_best(model_filename)
-    runner.run(ShogiState.create_initial(), 0)
+    runner.run(ShogiState.create_initial())
     winner = runner.get_winner()
     history = runner.get_history()
 

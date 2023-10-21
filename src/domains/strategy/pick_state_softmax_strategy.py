@@ -30,6 +30,12 @@ class PickStateSoftmaxStrategy(PickStateStrategy):
 
         return selected_state, score, probability
 
+    def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
+        scores = [self._search_score(state.get_unique_key()) for state in next_states]
+        probabilities = self._calc_probabilities(scores)
+        result = sorted(zip(next_states, scores, probabilities), key=lambda x: x[1])
+        return result
+
     # UCBによる補正を加えたスコアを算出
     def _calc_score(self, original_state: State, states: List[State], data: DataDict) -> Score:
         keys = np.array([state.get_unique_key() for state in states])
