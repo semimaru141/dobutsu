@@ -1,19 +1,24 @@
+import argparse
 import random
-import string
 
 TARGET_FILE = "train_multi.sh"
 
-def generate_random_string(length):
-    characters = string.ascii_letters + string.digits
-    return ''.join(random.choice(characters) for _ in range(length))
+def get_args() -> str:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('basename', type=str)
+    parser.add_argument('model_name', type=str)
 
-def write_file():
+    args = parser.parse_args()
+    return args.basename, args.model_name
+
+def write_file(basename: str, model_name: str):
     with open(TARGET_FILE, "w") as file:
-        for i in range(1, 61):
-            seed = generate_random_string(10)
-            filename = '0' * (3 - len(str(i)))  + str(i)
-            # 10000000試合 = 4h
-            file.write(f"python3 -m src.train_multi 20000000 {seed} dump_{filename}\n")
+        for i in range(1, 21):
+            seed = random.randint(1, 1000000)
+            index = '0' * (3 - len(str(i)))  + str(i)
+            # 50000試合 = 2h
+            file.write(f"python3 -m src.train_multi_model 50000 {seed} {basename}_{index} --model_name={model_name}\n")
 
 if __name__ == "__main__":
-    write_file()
+    basename, model_name = get_args()
+    write_file(basename, model_name)
