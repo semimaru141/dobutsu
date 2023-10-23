@@ -29,8 +29,11 @@ class TrainDataStrategyFactoryRunner():
 
     def set_seed(self, seed: int) -> None:
         np.random.seed(seed)
+
+    def run(self, state: State) -> None:
+        self._run(state, 0)
     
-    def run(self, state: State, step: Step) -> Score:
+    def _run(self, state: State, step: Step) -> Score:
             # ループからの離脱
         if step > DRAW_LIMIT: return 0
 
@@ -48,7 +51,7 @@ class TrainDataStrategyFactoryRunner():
         # 再帰
         next_states = state.get_next_states()
         next_state = self.factory.pick_state(state, next_states)
-        score = self.run(next_state, step + 1) * -0.95
+        score = self._run(next_state, step + 1) * -0.95
 
         # フィードバック
         self.factory.data_add(state, score)

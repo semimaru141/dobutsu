@@ -8,7 +8,7 @@ def train_multi(trial: int, seed: int, filename: str):
     runner = TrainDataStrategyFactoryRunner.create_mcts()
     runner.set_seed(seed)
     for _ in range(trial):
-        runner.run(ShogiState.from_key(base_key), 0)
+        runner.run(ShogiState.from_key(base_key))
     train_data = runner.get_factory().create()
     print(f"試合回数: {trial}")
     print(f"総出現局面数: {train_data.get_size()}")

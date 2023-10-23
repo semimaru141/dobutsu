@@ -2,6 +2,8 @@ from typing import List, Tuple
 from src.consts.domain import Score, SelectionProbability
 from src.domains.abstract.state import State
 from src.domains.abstract.stockable import Stockable
+from src.domains.shogi.visualizers.gif import Gif
+from src.domains.shogi.visualizers.image_visualizer import ImageVisualizer
 from src.domains.shogi.visualizers.string_visualizer import StringVisualizer
 
 class History(Stockable):
@@ -27,3 +29,7 @@ class History(Stockable):
             print(f'probability: {probability}')
             turn = -1 if i % 2 == 1 else 1
             print(f'score: {score * turn}')
+
+    def create_gif(self) -> Gif:
+        images = [ImageVisualizer(state, i % 2 == 1).visualize() for i, (state, _, _) in enumerate(self)]
+        return Gif(images)

@@ -41,7 +41,10 @@ class HistoryRunner():
         self.strategy = strategy
         self.winner: Union[None, Winner] = None
 
-    def run(self, state: State, step: Step, probability: SelectionProbability = 1):
+    def run(self, state: State) -> None:
+        self._run(state, 0, 1)
+    
+    def _run(self, state: State, step: Step, probability: SelectionProbability):
         # ループからの離脱
         if step > DRAW_LIMIT: return 0
 
@@ -63,7 +66,7 @@ class HistoryRunner():
         # 再帰
         next_states = state.get_next_states()
         next_state, score, new_probability = self.strategy.pick_state_verbose(state, next_states, {})
-        self.run(next_state, step + 1, new_probability)
+        self._run(next_state, step + 1, new_probability)
 
         # フィードバック
         self.history.data_add(state, score * -1, probability)

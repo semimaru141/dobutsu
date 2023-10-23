@@ -12,3 +12,7 @@ class PickStateStrategy(ABC):
     @abstractmethod
     def pick_state_verbose(self, original_state: State, next_states: List[State], data: Dict[Key, List[Score]]) -> Tuple[State, Score, SelectionProbability]:
         pass
+
+    @abstractmethod
+    def get_all_verbose(self, original_state: State, next_states: List[State], data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
+        pass

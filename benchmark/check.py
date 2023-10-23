@@ -16,11 +16,11 @@ def evaluate():
     model = ModelFileFactory(filename).create()
     evaluator = ModelEvaluator(model)
     benchmark = Benchmark()
-    result_dic = benchmark.run(evaluator)
+    result_lists = benchmark.run(evaluator)
 
-    for key, result in result_dic.items():
-        print(key)
-        result.print()
+    for result_list in result_lists:
+        result_list.print()
+        result_list.show_failed()
 
 if __name__ == "__main__":
     evaluate()
