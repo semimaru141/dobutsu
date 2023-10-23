@@ -8,7 +8,7 @@ class SearchTreeNode(Stockable):
         self.state = state
         self.score = score
         self.probability = probability
-        self.children: List[Tuple[State, Score, SelectionProbability]] = []
+        self.children: List[SearchTreeNode] = []
 
     def data_add(self, state: State, score: Score, probability: SelectionProbability) -> None:
         self.children.append(SearchTreeNode(state, score, probability))
@@ -17,4 +17,7 @@ class SearchTreeNode(Stockable):
         return self.children
     
     def get_state(self) -> State:
-        return self.state 
+        return self.state
+
+    def get_all(self) -> Tuple[State, Score, SelectionProbability]:
+        return self.state, self.score, self.probability

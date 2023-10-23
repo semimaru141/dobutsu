@@ -4,7 +4,7 @@ from src.consts.application import Winner
 
 def test_with_model(model_filename: str):
     runner = HistoryRunner.create_best(model_filename)
-    runner.run(ShogiState.create_initial())
+    runner.run(ShogiState.from_key('0603001200aa010100'))
     winner = runner.get_winner()
     history = runner.get_history()
 
@@ -15,4 +15,5 @@ def test_with_model(model_filename: str):
     else:
         print("draw")
 
-    history.print()
+    gif = history.create_gif()
+    gif.show()
