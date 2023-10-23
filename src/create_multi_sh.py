@@ -17,7 +17,7 @@ def write_file(basename: str, model_name: str):
             seed = random.randint(1, 1000000)
             index = '0' * (3 - len(str(i)))  + str(i)
             # 50000試合 = 2h
-            file.write(f"python3 -m src.train_multi_model 50000 {seed} {basename}_{index} --model_name={model_name}\n")
+            file.write(f"python3 -m src.train_multi_model 50000 {seed} {basename}_{index} {model_name}\n")
 
 if __name__ == "__main__":
     basename, model_name = get_args()

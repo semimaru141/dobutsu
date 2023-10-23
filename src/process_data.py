@@ -14,7 +14,8 @@ def get_args() -> str:
     return args.basename, args.before_name
 
 def run_model(basename: str, before_name: str):
-    target_filenames = [f'{basename}_{str(i)}' for i in range(1, 21)]
+    index = map(lambda i: '0' * (3 - len(str(i)))  + str(i), range(1, 21))
+    target_filenames = [f'{basename}_{i}' for i in index]
     allin_filename = basename + '_allin'
     compressed_filename = basename + '_compressed'
     merged_filename = basename + '_merged'
