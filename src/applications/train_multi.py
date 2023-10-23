@@ -1,18 +1,18 @@
+import time
 from src.domains.runner.train_data_strategy_factory_runner import TrainDataStrategyFactoryRunner
 from src.domains.shogi.shogi_state import ShogiState
 
-base_key = '060820021000000012'
-target_key = '000600773010012000'
-
 def train_multi(trial: int, seed: int, filename: str):
+    print(f"トレーニング開始 現在時刻: {time.time()}")
     runner = TrainDataStrategyFactoryRunner.create_mcts()
     runner.set_seed(seed)
     for _ in range(trial):
-        runner.run(ShogiState.from_key(base_key))
+        runner.run(ShogiState.create_initial())
     train_data = runner.get_factory().create()
     print(f"試合回数: {trial}")
     print(f"総出現局面数: {train_data.get_size()}")
     print(f"2回以上出現した局面数: {train_data.get_except_one_appearance_size()}")
     print(f"予測回数: {train_data.get_predicted_count()}")
-    print(f"正解局面到達数: {train_data.search_appearance_count(target_key)}")
+    print(f"トレーニング終了 現在時刻: {time.time()}")
+    # print(f"正解局面到達数: {train_data.search_appearance_count(target_key)}")
     train_data.save(filename)
