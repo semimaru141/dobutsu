@@ -34,10 +34,17 @@ class TrainData:
     def get_except_one_appearance_size(self) -> int:
         return len([value for value in self.dict.values() if value[1] > 1])
     
-    def compress(self) -> 'TrainData':
+    def compress_by_appearance(self) -> 'TrainData':
         ret: TrainDataDic = {}
         for key, value in self.dict.items():
-            if value[1] > COMPRESSION_THRESHOLD:
+            if value[1] > COMPRESSION_APPEARANCE_THRESHOLD:
+                ret[key] = value
+        return TrainData(ret)
+    
+    def compress_by_score_abs(self) -> 'TrainData':
+        ret: TrainDataDic = {}
+        for key, value in self.dict.items():
+            if abs(value[0]) > COMPRESSION_SCORE_ABS_THRESHOLD:
                 ret[key] = value
         return TrainData(ret)
     
