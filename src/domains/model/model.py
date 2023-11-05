@@ -1,4 +1,5 @@
 import numpy as np
+from tensorflowjs.converters import save_keras_model
 from src.consts.domain import *
 from src.utils.key_handler import proccess_key
 
@@ -13,3 +14,7 @@ class Model():
         x = np.array([proccess_key(key)], dtype=np.float32)
         t = self.model(x, training=False)
         return t[0][0]
+    
+    def save_as_js(self, filename):
+        save_keras_model(self.model, 'data/model_js/' + filename)
+

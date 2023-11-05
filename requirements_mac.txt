@@ -2,3 +2,4 @@ numpy==1.23.5
 pytest==7.3.1
 pillow==9.5.0
 graphviz==0.20.1
+tensorflowjs==4.12.0
