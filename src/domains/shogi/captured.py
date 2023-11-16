@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from src.consts.domain import *
 from src.domains.shogi.const import *
 
@@ -43,6 +43,24 @@ class Captured:
     def get_unique_key(self) -> str:
         # 現在のcapturedに一意なkeyを返す
         return ''.join(map(str, self._captured))
+    
+    # 先手・後手に関わらず0でないpiece・indexを取得する
+    def get_nonzero_set(self) -> List[Tuple[Piece, CapturedIndex]]:
+        return [(get_piece_num(captured_index), captured_index) for captured_index in range(RANGE_OF_CAPTURED) if self._captured[captured_index] != 0]
+
+    # 強制的に駒を使用する
+    def use_index_unsafe(self, index: CapturedIndex):
+        self._captured[index] -= 1
+    
+    # 強制的に駒を持ち駒に入れる
+    def take_piece_unsafe(self, piece: Piece, player: Player):
+        if(piece == MY_LION_NUM or piece == OP_LION_NUM): return
+        if player == Player.ME:
+            index = parse_piece(piece)
+            self._captured[index] += 1
+        if player == Player.OP:
+            index = turn_index(parse_piece(piece))
+            self._captured[index] += 1
 
 # 駒を与えると、自分の駒のインデックスを返す
 # 駒取得時・駒使用時の双方から使用される
@@ -65,14 +83,15 @@ cap_index_to_piece_dic = {
     MY_ELE_INDEX: MY_ELE_NUM,
     MY_GIR_INDEX: MY_GIR_NUM,
     MY_CHICK_INDEX: MY_CHICK_NUM,
-    OP_ELE_INDEX: MY_ELE_NUM,
-    OP_GIR_INDEX: MY_GIR_NUM,
-    OP_CHICK_INDEX: MY_CHICK_NUM
+    OP_ELE_INDEX: OP_ELE_NUM,
+    OP_GIR_INDEX: OP_GIR_NUM,
+    OP_CHICK_INDEX: OP_CHICK_NUM
 }
 
 def get_piece_num(index: CapturedIndex) -> Piece:
     return cap_index_to_piece_dic[index]
 
+# 版を回転させた後の番号を取得する
 turn_index_dic = {
     MY_ELE_INDEX: OP_ELE_INDEX,
     MY_GIR_INDEX: OP_GIR_INDEX,

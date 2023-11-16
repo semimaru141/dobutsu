@@ -9,6 +9,10 @@ class State(ABC):
         pass
 
     @abstractmethod
+    def get_all_possible_states(self) -> List[Type['State']]:
+        pass
+
+    @abstractmethod
     def get_unique_key(self) -> Key:
         pass
 
