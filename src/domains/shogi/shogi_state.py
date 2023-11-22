@@ -104,6 +104,47 @@ class ShogiState:
             captured.use_piece(piece)
             res.append(new_state.turn())
         return res
+    
+    def get_all_possible_states(self) -> List['ShogiState']:
+        res: List['ShogiState'] = []
+        # 駒を取る・置く・動かすことによって可能な状態を全て取得する
+        # アニーリング用のstate取得
+
+        # 盤上の駒の移動
+        for place in range(RANGE_OF_BOARD):
+            piece = self.board.get_piece(place)
+            if piece == EMPTY:
+                continue
+
+            # 空いているマスに移動させる
+            for new_place in self.board.get_empty_places():
+                new_state = self.copy()
+                board, _ = new_state.state
+                board.set_piece(place, EMPTY)
+                board.set_piece(new_place, piece)
+                res.append(new_state)
+
+            # 駒を持ち駒に移動する
+            for key in Player:
+                if piece == MY_LION_NUM or piece == OP_LION_NUM:
+                    continue
+                new_state = self.copy()
+                board, captured = new_state.state
+                board.set_piece(place, EMPTY)
+                captured.take_piece_unsafe(piece, key)
+                res.append(new_state)
+
+        # 持ち駒の設置
+        for new_piece, captured_index in self.captured.get_nonzero_set():
+            # 空いているマスに移動させる
+            for new_place in self.board.get_empty_places():
+                new_state = self.copy()
+                board, captured = new_state.state
+                board.set_piece(new_place, new_piece)
+                captured.use_index_unsafe(captured_index)
+                res.append(new_state)
+
+        return res
 
 # 移動先を取得する
 def get_move(piece: Piece, place: Place):

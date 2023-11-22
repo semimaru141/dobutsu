@@ -1,4 +1,6 @@
 # board
+from enum import Enum
+
 RANGE_OF_BOARD = 12
 RANGE_OR_PIECE = 11
 
@@ -39,3 +41,8 @@ Place = int
 CapturedIndex = int
 
 Step = int
+
+# 自身or相手
+class Player(Enum):
+    ME = 'me'
+    OP = 'op'

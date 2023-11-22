@@ -12,6 +12,10 @@ class PickStateSoftmaxStrategy(PickStateStrategy):
     def __init__(self, evaluator: Evaluator, use_ucb: bool = True) -> None:
         self.evaluator = evaluator
         self.use_ucb = use_ucb
+        self.temperature = SOFTMAX_TEMPERATURE
+
+    def set_temperature(self, temperature):
+        self.temperature = temperature
 
     def pick_state(self, original_state: State, next_states: List[State], data: DataDict) -> State:
         scores = self._calc_score(original_state, next_states, data)
@@ -68,7 +72,7 @@ class PickStateSoftmaxStrategy(PickStateStrategy):
     # スコアから選出される確率を算出
     def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
         # softmax関数で算出(後手目線のため、評価値を反転している)
-        exp_scores = np.exp(-1 * np.array(scores) * SOFTMAX_TEMPERATURE)
+        exp_scores = np.exp(-1 * np.array(scores) * self.temperature)
         return exp_scores / np.sum(exp_scores)
     
     def _search_score(self, key: Key) -> Score:
