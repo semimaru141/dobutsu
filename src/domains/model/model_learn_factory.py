@@ -1,8 +1,8 @@
 from typing import Union
 from src.consts.domain import MODEL_BATCH_SIZE, MODEL_EPOCHS
 from src.domains.model.model import Model
+from src.domains.model.model_layers import compile_model, create_tanh
 from src.domains.ready_data.ready_data import ReadyData
-from tensorflow.python.keras import layers, models
 
 class ModelLearnFactory:
     # modelは新規モデル生成時に副作用が発生してしまう(処理の効率化のための対応)
@@ -20,18 +20,8 @@ class ModelLearnFactory:
         x = self.ready_data.x
         y = self.ready_data.y
 
-        # モデルの定義
-        model = models.Sequential()
-        model.add(layers.Dense(132 + 18, activation='relu'))
-        model.add(layers.Dense(512, activation='relu'))
-        model.add(layers.Dense(256, activation='relu'))
-        model.add(layers.Dense(128, activation='relu'))
-        model.add(layers.Dense(1, activation='linear'))
-
-        # モデルのコンパイル
-        model.compile(optimizer='adam',
-                    loss='mean_absolute_error',
-                    metrics=['accuracy'])
+        model = create_tanh()
+        compile_model(model)
 
         # モデルの学習
         model.fit(x, y, epochs=MODEL_EPOCHS, batch_size=MODEL_BATCH_SIZE)

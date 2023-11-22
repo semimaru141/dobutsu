@@ -19,3 +19,7 @@ class State(ABC):
     @abstractmethod
     def get_finish(self) -> Finish:
         pass
+
+    @abstractmethod
+    def copy(self) -> 'State':
+        pass

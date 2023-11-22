@@ -14,25 +14,21 @@ class AnnealingRunner():
     # モデルを利用してSoftmax + (UCB)のRunnerを作成する
     @staticmethod
     def create_with_model(model_filename: str, use_ucb: bool = False) -> 'AnnealingRunner':
-        model = ModelFileFactory(model_filename).create()
+        model = ModelFileFactory(model_filename).create().clone_linear()
         strategy = PickStateSoftmaxStrategy(ModelEvaluator(model), use_ucb)
         return AnnealingRunner(strategy)
     
-    def run(self, state: State, trial: int):
-        initial_temperature_exp = 1.0
-        return self._run(state, initial_temperature_exp, trial)
-
-    def _run(self, state: State, temperature_exp: float, trial: int):
-        if trial <= 0:
-            return state
-        
-        temperature = np.log(temperature_exp)
-        self.strategy.set_temperature(temperature)
-        next_states = state.get_all_possible_states()
-        next_state, score, _ = self.strategy.pick_state_verbose(state, next_states, {})
-        
-        self.scores.append(score)
-        return self._run(next_state, temperature_exp + ANNEALING_SCALRE, trial - 1)
+    def run(self, original_state: State, trial: int):
+        state: State = original_state.copy()
+        temperature_exp = 1.0
+        for _ in range(trial):
+            self.strategy.set_temperature(np.log(temperature_exp))
+            next_states = state.get_all_possible_states()
+            next_state, score, _ = self.strategy.pick_state_verbose(state, next_states, {})
+            self.scores.append(score)
+            state = next_state
+            temperature_exp += ANNEALING_SCALRE
+        return state
     
     def get_scores(self) -> List[float]:
         return self.scores
