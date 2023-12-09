@@ -1,17 +1,24 @@
 import numpy as np
 from typing import Dict, List, Tuple
-from src.consts.domain import SOFTMAX_TEMPERATURE, Key, Score, SelectionProbability
+from src.consts.domain import *
 from src.domains.abstract.evaluator import Evaluator
 from src.domains.abstract.pick_state_strategy import PickStateStrategy
 from src.domains.abstract.state import State
 
-# 最善のみ出力してほしい場合
-class PickStateBestStrategy(PickStateStrategy):
-    def __init__(self, evaluator: Evaluator):
+DataDict = Dict[Key, List[Score]]
+
+# ε-greedy法による選択を行う
+class PickStateEgreedyStrategy(PickStateStrategy):
+    def __init__(self, evaluator: Evaluator, use_ucb: bool = True) -> None:
         self.evaluator = evaluator
+        self.use_ucb = use_ucb
+        self.epsilon = GREEDY_EPSILON
 
     def pick_state(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> State:
         scores = [self._evaluate(state) for state in next_states]
+        use_random = self.use_random()
+        if use_random:
+            return np.random.choice(next_states)
         max_score = min(scores)
         for i, score in enumerate(scores):
             if score == max_score:
@@ -20,24 +27,26 @@ class PickStateBestStrategy(PickStateStrategy):
     
     def pick_state_verbose(self, original_state: State, next_states: List[State], data: Dict[Key, List[Score]]) -> Tuple[State, Score, SelectionProbability]:
         scores = [self._evaluate(state) for state in next_states]
-        probabilities = self._calc_probabilities(scores)
+        use_random = self.use_random()
+        if use_random:
+            return np.random.choice(next_states), score, 1 / len(next_states)
         max_score = min(scores)
         for i, score in enumerate(scores):
             if score == max_score:
-                return next_states[i], score, probabilities[i]
+                return next_states[i], score, 1
         raise 'state not found error'
-    
+
     def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
         scores = [self._evaluate(state) for state in next_states]
-        probabilities = self._calc_probabilities(scores)
-        result = sorted(zip(next_states, scores, probabilities), key=lambda x: x[1])
-        return result
+        use_random = self.use_random()
+        if use_random:
+            return [(state, score, 1 / len(next_states)) for state, score in zip(next_states, scores)]
+        max_score = min(scores)
+        probabilities = [1 if score == max_score else 0 for score in scores]
+        return zip(next_states, scores, probabilities)
     
-        # スコアから選出される確率を算出
-    def _calc_probabilities(self, scores: List[Score]) -> np.ndarray:
-        # softmax関数で算出
-        exp_scores = np.exp(-1 * np.array(scores) * SOFTMAX_TEMPERATURE)
-        return exp_scores / np.sum(exp_scores)
-
-    def _evaluate(self, state: State) -> Score:
-        return self.evaluator.search_score(state.get_unique_key())
+    def use_random(self) -> bool:
+        return np.random.rand() <= self.epsilon
+    
+    def _evaluate(self, key: Key) -> Score:
+        return self.evaluator.search_score(key)

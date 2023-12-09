@@ -4,7 +4,7 @@ from src.consts.domain import ANNEALING_SCALRE
 from src.domains.abstract.state import State
 from src.domains.model.model_evaluator import ModelEvaluator
 from src.domains.model.model_file_factory import ModelFileFactory
-from src.domains.strategy.pick_state_softmax_strategy import PickStateSoftmaxStrategy
+from src.domains.pick_state_strategy.pick_state_softmax_strategy import PickStateSoftmaxStrategy
 
 class AnnealingRunner():
     def __init__(self, strategy: PickStateSoftmaxStrategy):

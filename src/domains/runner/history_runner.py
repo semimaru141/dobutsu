@@ -7,9 +7,9 @@ from src.domains.abstract.state import State
 from src.domains.model.model_evaluator import ModelEvaluator
 from src.domains.model.model_file_factory import ModelFileFactory
 from src.domains.shogi.history import History
-from src.domains.strategy.pick_state_best_strategy import PickStateBestStrategy
-from src.domains.strategy.pick_state_randomly_strategy import PickStateRandomlyStrategy
-from src.domains.strategy.pick_state_softmax_strategy import PickStateSoftmaxStrategy
+from src.domains.pick_state_strategy.pick_state_best_strategy import PickStateBestStrategy
+from src.domains.pick_state_strategy.pick_state_randomly_strategy import PickStateRandomlyStrategy
+from src.domains.pick_state_strategy.pick_state_softmax_strategy import PickStateSoftmaxStrategy
 
 # 経由した盤面や経路等を把握しているRunner
 class HistoryRunner():
