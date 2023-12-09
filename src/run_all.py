@@ -13,11 +13,11 @@ def get_args() -> Tuple[int, int, str, Union[str, None], Union[float, None], Uni
     parser.add_argument('seed', type=int)
     parser.add_argument('filename', type=str)
     parser.add_argument('--model_name', type=str)
-    parser.add_argument('--gamma', type=float)
+    parser.add_argument('--param', type=float)
     parser.add_argument('--algorithm', type=str)
 
     args = parser.parse_args()
-    return args.trial, args.seed, args.filename, args.model_name, args.gamma, args.algorithm
+    return args.trial, args.seed, args.filename, args.model_name, args.param, args.algorithm
 
 def run_mcts(trial: int, seed: int, filename: str):
     compressed_filename = filename + '_merged'
@@ -26,20 +26,20 @@ def run_mcts(trial: int, seed: int, filename: str):
     format_data(compressed_filename, filename)
     make_model(filename, filename)
 
-def run_model(trial: int, seed: int, filename: str, model_name: str, gamma: float, algorithm: str):
+def run_model(trial: int, seed: int, filename: str, model_name: str, param: float, algorithm: str):
     compressed_filename = filename + '_compressed'
     merged_filename = filename + '_merged'
     pre_merged_filaname = model_name + '_merged'
 
-    train_multi_model(trial, seed, filename, model_name, gamma, algorithm)
+    train_multi_model(trial, seed, filename, model_name, param, algorithm)
     compress_train_data(filename, compressed_filename)
     merge_train_data([compressed_filename, pre_merged_filaname], merged_filename)
     format_data(merged_filename, filename)
     make_model(filename, filename)
 
 if __name__ == "__main__":
-    trial, seed, filename, model_name, gamma, algorithm = get_args()
+    trial, seed, filename, model_name, param, algorithm = get_args()
     if model_name == None:
         run_mcts(trial, seed, filename)
     else:
-        run_model(trial, seed, filename, model_name, gamma, algorithm)
+        run_model(trial, seed, filename, model_name, param, algorithm)

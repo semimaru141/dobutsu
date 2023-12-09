@@ -14,6 +14,9 @@ class PickStateEgreedyStrategy(PickStateStrategy):
         self.use_ucb = use_ucb
         self.epsilon = GREEDY_EPSILON
 
+    def set_epsilon(self, epsilon: float):
+        self.epsilon = epsilon
+
     def pick_state(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> State:
         scores = [self._evaluate(state) for state in next_states]
         use_random = self.use_random()
