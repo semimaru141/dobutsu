@@ -1,9 +1,10 @@
 import numpy as np
 from src.consts.application import DRAW_LIMIT, Step
-from src.consts.domain import Finish, Score
+from src.consts.domain import DISCOUNT_RATE, Finish, Score
 from src.domains.abstract.calc_score_strategy import CalcScoreStrategy
 from src.domains.abstract.pick_state_strategy import PickStateStrategy
 from src.domains.abstract.state import State
+from src.domains.calc_score_strategy.q_calc_score_strategy import QCalcScoreStrategy
 from src.domains.calc_score_strategy.sarsa_calc_score_strategy import SarsaCalcScoreStrategy
 from src.domains.model.model_evaluator import ModelEvaluator
 from src.domains.model.model_file_factory import ModelFileFactory
@@ -15,10 +16,10 @@ from src.domains.train_data.train_data_strategy_factory import TrainDataStrategy
 class TrainDataStrategyFactoryRunner():
     # モデルを利用してSoftmax + UCBのRunnerを作成する
     @staticmethod
-    def create_with_model(model_filename: str, use_ucb: bool = True) -> 'TrainDataStrategyFactoryRunner':
+    def create_with_model(model_filename: str, use_ucb: bool = True, gamma = DISCOUNT_RATE) -> 'TrainDataStrategyFactoryRunner':
         model = ModelFileFactory(model_filename).create()
         pick_state_strategy = PickStateSoftmaxStrategy(ModelEvaluator(model), use_ucb)
-        calc_score_strategy = SarsaCalcScoreStrategy()
+        calc_score_strategy = SarsaCalcScoreStrategy(gamma)
         return TrainDataStrategyFactoryRunner(pick_state_strategy, calc_score_strategy)
     
     # MCTsによるランダム試行のRunnerを作成する
@@ -26,6 +27,15 @@ class TrainDataStrategyFactoryRunner():
     def create_mcts() -> 'TrainDataStrategyFactoryRunner':
         pick_state_strategy = PickStateRandomlyStrategy()
         calc_score_strategy = SarsaCalcScoreStrategy()
+        return TrainDataStrategyFactoryRunner(pick_state_strategy, calc_score_strategy)
+
+    @staticmethod
+    def create_q_learning(model_filename: str, gamma = DISCOUNT_RATE) -> 'TrainDataStrategyFactoryRunner':
+        model = ModelFileFactory(model_filename).create()
+        # 共通のEvaluatorを利用することで効率化を図る
+        evaluator = ModelEvaluator(model)
+        pick_state_strategy = PickStateSoftmaxStrategy(evaluator, False)
+        calc_score_strategy = QCalcScoreStrategy(evaluator, gamma)
         return TrainDataStrategyFactoryRunner(pick_state_strategy, calc_score_strategy)
 
     def __init__(self, pick_state_strategy: PickStateStrategy, calc_score_strategy: CalcScoreStrategy):

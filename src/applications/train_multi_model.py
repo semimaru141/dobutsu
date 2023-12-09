@@ -1,10 +1,18 @@
 import time
+from typing import Literal, Union
+from src.consts.domain import DISCOUNT_RATE
 from src.domains.runner.train_data_strategy_factory_runner import TrainDataStrategyFactoryRunner
 from src.domains.shogi.shogi_state import ShogiState
 
-def train_multi_model(trial: int, seed: int, filename: str, model_name: str):
+def train_multi_model(trial: int, seed: int, filename: str, model_name: str, gamma: float = DISCOUNT_RATE, algorithm: Literal["q", "sarsa"] = "sarsa"):
     print(f"トレーニング開始 現在時刻: {time.time()}")
-    runner = TrainDataStrategyFactoryRunner.create_with_model(model_name, False)
+    print(f"モデル名: {model_name}")
+    print(f"割引率: {gamma}")
+    print(f"アルゴリズム: {algorithm}")
+    if algorithm == "q":
+        runner = TrainDataStrategyFactoryRunner.create_q_learning(model_name, gamma)
+    else:
+        runner = TrainDataStrategyFactoryRunner.create_with_model(model_name, False, gamma)
     runner.set_seed(seed)
     for _ in range(trial):
         runner.run(ShogiState.create_initial())
