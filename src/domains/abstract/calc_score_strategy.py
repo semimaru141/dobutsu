@@ -10,5 +10,5 @@ class CalcScoreStrategy(ABC):
         self.gamma = gamma
 
     @abstractmethod
-    def calc_score(self, state: State, before_score) -> Score:
+    def calc_score(self, state: State, before_score: Score) -> Score:
         pass

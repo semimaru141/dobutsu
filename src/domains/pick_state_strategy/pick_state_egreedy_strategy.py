@@ -18,7 +18,7 @@ class PickStateEgreedyStrategy(PickStateStrategy):
         self.epsilon = epsilon
 
     def pick_state(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> State:
-        scores = [self._evaluate(state) for state in next_states]
+        scores = [self._evaluate(state.get_unique_key()) for state in next_states]
         use_random = self.use_random()
         if use_random:
             return np.random.choice(next_states)
@@ -29,7 +29,7 @@ class PickStateEgreedyStrategy(PickStateStrategy):
         raise 'state not found error'
     
     def pick_state_verbose(self, original_state: State, next_states: List[State], data: Dict[Key, List[Score]]) -> Tuple[State, Score, SelectionProbability]:
-        scores = [self._evaluate(state) for state in next_states]
+        scores = [self._evaluate(state.get_unique_key()) for state in next_states]
         use_random = self.use_random()
         if use_random:
             return np.random.choice(next_states), score, 1 / len(next_states)
@@ -40,7 +40,7 @@ class PickStateEgreedyStrategy(PickStateStrategy):
         raise 'state not found error'
 
     def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
-        scores = [self._evaluate(state) for state in next_states]
+        scores = [self._evaluate(state.get_unique_key()) for state in next_states]
         use_random = self.use_random()
         if use_random:
             return [(state, score, 1 / len(next_states)) for state, score in zip(next_states, scores)]
