@@ -37,7 +37,7 @@ class PickStateSoftmaxStrategy(PickStateStrategy):
     def get_all_verbose(self, _original_state: State, next_states: List[State], _data: Dict[Key, List[Score]]) -> List[Tuple[State, Score, SelectionProbability]]:
         scores = [self._search_score(state.get_unique_key()) for state in next_states]
         probabilities = self._calc_probabilities(scores)
-        result = sorted(zip(next_states, scores, probabilities), key=lambda x: x[1])
+        result = sorted(zip(next_states, scores, probabilities), key=lambda x: x[0].get_unique_key())
         return result
 
     # UCBによる補正を加えたスコアを算出

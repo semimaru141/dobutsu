@@ -59,7 +59,7 @@ class SearchTreeRunner():
 
         # 再帰
         next_states = state.get_next_states()
-        datas = self.strategy.get_all_verbose(state, next_states, {})
+        datas = self.strategy.get_all_verbose(state, next_states, {})[0:4]
         for (next_state, score, new_probability) in datas:
             node.data_add(next_state, score, new_probability)
         
